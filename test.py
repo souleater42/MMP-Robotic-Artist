@@ -24,8 +24,8 @@ if __name__ == "__main__":
     #sets up the serial port, to be able to communicate with the plotter
     #ser = set_serial()
     ser = serial.Serial('/dev/ttyUSB0', 9600, stopbits=1, parity='E')
-    ser.write('PA 400 400;')
-    ser.write('PA 2000 2000;')
-    ser.write('PA 5000 500;')
-    ser.write('PA 6000 400;')
-    ser.write('PA 0 0;')
+    ser.write(b"PA 400 400;")
+    ser.write(b"PA 2000 2000;")
+    ser.write(b"PA 5000 500;")
+    ser.write(b"PA 6000 400;")
+    ser.write(b"PA 0 0;")

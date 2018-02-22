@@ -8,6 +8,7 @@ def read_all():
         if char == '\r':
             break
         else:
+            print(char.decode("utf-8"))
             buffer += char.decode("utf-8")
     return buffer
 

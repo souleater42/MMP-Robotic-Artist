@@ -5,9 +5,12 @@ Description => This class will be used to initialize and control the serial.
 There are methods to read and send messages to the serial given to it.
 
 Author => Matthew Howard (mah60).
-Version => 0.1 - 23/02/2018 - intial set up for the class, this will be
-    initialization of the serial connection at creation of serial. As well,
-    functions to read and write to serial connection.
+Version =>
+0.1 - 23/02/2018 - intial set up for the class, this will be
+initialization of the serial connection at creation of serial. As well,
+functions to read and write to serial connection.
+0.1.1 - 26/02/2018 -  made some print commands to print input and output
+from the serial connection.
 """
 import serial
 from time import sleep
@@ -44,6 +47,7 @@ class serial_control(object):
         self.ser = serial.Serial(self.serial_port, self.baund,
                                  stopbits=self.stopbits, parity=self.parity)
 
+    
     def read_all(self):
         """
         Summary => handle all messages being recieved from serial connection.
@@ -55,7 +59,7 @@ class serial_control(object):
         return => null if no response or the string of input from incoming
             message
         """
-        buffer = None
+        buffer = ""
         # check if there are any expected input from the serial
         while self.ser.in_waiting:
             # if there is incomming input, throw into loop and
@@ -91,4 +95,7 @@ class serial_control(object):
         # will make the program sleep for 100 ms to see if there is a response
         sleep(0.1)
         # returns a response if one exists
-        return self.read_all()
+        print(command)
+        response = self.read_all()
+        print(response + "-----")
+        return response

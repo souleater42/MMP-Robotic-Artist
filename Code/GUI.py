@@ -8,6 +8,8 @@ comming from it.
 Author => Matthew Howard (mah60).
 Version => 0.1 - 24/02/2018 -
 """
+import sys
+from PyQt4 import QtGui
 
 
 class GUI(object):
@@ -25,3 +27,14 @@ class GUI(object):
 
             Args =>
             """
+            self.app = QtGui.QApplication(sys.argv)
+
+            self.window = QtGui.QWidget()
+            self.window.resize(750, 500)
+            self.window.move(150, 150)
+            self.window.setWindowTitle('Robotic artist : Walter')
+            # TODO: create a better Icon for the window
+            self.window.setWindowIcon(QtGui.QIcon('../Images/Icon.png'))
+            self.window.show()
+
+            sys.exit(self.app.exec_())

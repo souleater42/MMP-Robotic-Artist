@@ -1,2 +1,6 @@
 Hackaday - https://hackaday.io/project/12276-roland-dg-dxy-990/details
 Detailed drawing example - https://www.youtube.com/watch?v=eFgTFn-bhzY
+Manga eye icon - https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFhLrJaK61NZ1IHhl8wg6pMaY_c5-7mURnHijScJSi0WBwt92vzg
+PyQt4 basics - http://zetcode.com/gui/pyqt4/firstprograms/
+PyQt4 tutorial playlist - https://www.youtube.com/playlist?list=PLQVvvaa0QuDdVpDFNq4FwY9APZPGSUyR4
+Raspberry Pi webcam doc - https://www.raspberrypi.org/documentation/usage/webcams/README.md

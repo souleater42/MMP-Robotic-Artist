@@ -12,6 +12,7 @@ input.
 """
 # import serial_control as ser
 import GUI
+import Robotic_Artist_GUI
 
 if __name__ == "__main__":
 
@@ -21,4 +22,4 @@ if __name__ == "__main__":
     # ser.write('PA 5000 5000;')
     # ser.write('RR 40 40;')
 
-    Gui = GUI.GUI()
+    Gui = Robotic_Artist_GUI.Ui_mainWindow()

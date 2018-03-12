@@ -9,6 +9,7 @@ Author => Matthew Howard (mah60).
 Version => 0.1 - 12/03/2018 -
 """
 import sys
+from serial_control import SerialControl
 from gui_view import Ui_mainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox

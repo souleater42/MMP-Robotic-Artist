@@ -47,7 +47,6 @@ class SerialControl(object):
         self.ser = serial.Serial(self.serial_port, self.baund,
                                  stopbits=self.stopbits, parity=self.parity)
 
-
     def read_all(self):
         """
         Summary => handle all messages being recieved from serial connection.

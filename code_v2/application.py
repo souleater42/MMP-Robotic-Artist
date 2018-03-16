@@ -1,45 +1,37 @@
+"""
+Summary => The controller class for initializing the Robotic aritst.
+
+Description => TODO: add a description.
+
+Author => Matthew Howard (mah60).
+Version =>
+0.1 - 23/02/2018 - This version is the intial set up for the
+controller. It contains a basic initialization setup and a way to read any
+input.
+0.1.1 - 26/02/2018 - corrected the calling of the serial command.
+0.2 - 12/03/2018 - recreated file and renamed it to Application.py. This code
+is now in code_v2. The basic set has done to start the gui and run the program
+as a whole.
+"""
 import sys
-# from PyQt5.QtWidgets import QApplication, QDialog
 from main_window import MainWindow
-from serial_control import SerialControl
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication
 
-def draw_hi(ser):
-
-    ser.write('SP 1;')
-    ser.write('PA 100 100;')
-    ser.write('PD;')
-    ser.write('PA 100 1000;')
-    ser.write('PU;')
-
-    ser.write('PA 100 550;')
-    ser.write('PD;')
-    ser.write('PA 550 550;')
-    ser.write('PU;')
-
-    ser.write('PA 550 100;')
-    ser.write('PD;')
-    ser.write('PA 550 1000;')
-    ser.write('PU;')
-
-    ser.write('PA 700 100;')
-    ser.write('PD;')
-    ser.write('PA 700 800;')
-    ser.write('PU;')
-
-    ser.write('PA 700 900;')
-    ser.write('PD;')
-    ser.write('PA 700 1000;')
-    ser.write('PU;')
-
-    ser.write('SP 0;')
 
 def main():
+    """
+    Summary => will initilize the robotic artist.
+
+    Description =>
+
+    args => None
+
+    None => None
+    """
     app = QApplication(sys.argv)
     window = MainWindow()
-    #ui = Ui_mainWindow()
-    #ui.setupUi(window)
+    # ui = Ui_mainWindow()
+    # ui.setupUi(window)
 
     window.show()
     sys.exit(app.exec_())

@@ -139,7 +139,7 @@ class XYCoordinate(object):
 
         Return => None
         """
-        return self.finished
+        return self.drawn
 
     def drawn(self):
         """
@@ -151,7 +151,7 @@ class XYCoordinate(object):
 
         Return => None
         """
-        self.finished = True
+        self.drawn = True
 
     def __str__(self):
         """

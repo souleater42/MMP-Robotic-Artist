@@ -11,8 +11,8 @@ to control the transactions in the gui and the class is able to draw the gui
 design from gui_view made in qt designer.
 """
 import sys
-from camera_controller import CameraController
-from image_proccesor import ImageProccesor
+# from camera_controller import CameraController
+# from image_proccesor import ImageProccesor
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 # QApplication, QMainWindow,
@@ -46,8 +46,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.move(100, 100)  # move gui to the 100,100 on the screen
         self.setWindowIcon(QtGui.QIcon('Images/Icon.png'))  # sets icon for gui
-        self.camera = CameraController()
-        self.image_proccessor = ImageProccesor()
+        # self.camera = CameraController()
+        # self.image_proccessor = ImageProccesor()
         # --------------------------------------------------------
         # set menuBar actions
         self.ui.actionExit_Application.setShortcut('Ctrl+Q')
@@ -79,7 +79,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.styled_image.setPixmap(pixmap)
         self.ui.styled_image.setAlignment(QtCore.Qt.AlignCenter)
         btn = self.ui.yes_no_button2.button(self.ui.yes_no_button.Yes)
-        # btn.clicked.connect(self.start_plot)
+        btn.clicked.connect(self.start_plot)
         btn = self.ui.yes_no_button2.button(self.ui.yes_no_button.No)
         btn.clicked.connect(self.reject_style)
 
@@ -122,7 +122,7 @@ class MainWindow(QtWidgets.QMainWindow):
         Return => None
         """
         print("Image processed")
-        self.image_proccessor.canny_style()
+        # self.image_proccessor.canny_style()
         self.display_stack(3)
 
     def capture_image(self):
@@ -161,6 +161,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         Return => None
         """
+        print("plotting")
         self.plotter = PlotterController(None, 1)
         self.plotter.run()
 

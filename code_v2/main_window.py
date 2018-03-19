@@ -17,7 +17,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 # QApplication, QMainWindow,
 from gui_view import Ui_mainWindow
-from plotter_controller import PlotterController
+# from plotter_controller import PlotterController
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -82,6 +82,10 @@ class MainWindow(QtWidgets.QMainWindow):
         btn.clicked.connect(self.start_plot)
         btn = self.ui.yes_no_button2.button(self.ui.yes_no_button.No)
         btn.clicked.connect(self.reject_style)
+        # pixmap = QtGui.QPixmap("Images/cap.jpg")
+        # pixmap = pixmap.scaled(498, 300, QtCore.Qt.KeepAspectRatio)
+        # self.ui.video_capture.setPixmap(pixmap)
+        # self.ui.video_capture.show()
 
 # ------------------------------------------------------------
 # functions
@@ -89,13 +93,16 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def display_stack(self, i):
         """
-        Summary => Will create a GUI object.
+        Summary => changes the widget stack page.
 
-        Description => will change th stacked widget view to the int given
+        Description => will change the stacked widget view to the int given
         through i.
 
         This code was found on:
         https://www.tutorialspoint.com/pyqt/pyqt_qstackedwidget.htm
+
+        If the specified page has any objects that needs to be initialized
+        then the process will be ran through here.
 
         Args => i => the int for the page wanted. Ranging from 0-3
 
@@ -105,7 +112,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         if(i == 0):
             print("starting VideoCapture")
-            # self.camera.start_video_capture()
+            # self.camera.start_video_capture(12)
             # self.ui.captured_image.
 # ------------------------------------------------------------
 # Actions
@@ -113,9 +120,11 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def proccess_image(self):
         """
-        Summary => Will create a GUI object.
+        Summary => starts the process for proccessing.
 
-        Description =>
+        Description => start the process for processing the image that
+                was captured ealier on in the gui. This method will be
+                a action used for the specified button.
 
         Args => None
 
@@ -127,23 +136,27 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def capture_image(self):
         """
-        Summary => Will create a GUI object.
+        Summary => starts the process to capture the picture.
 
-        Description =>
+        Description => starts the process to capture the picture from the
+                video feed. This image will be saved to 'Image/takenPicture'.
 
         Args => None
 
         Return => None
         """
         print("taken picture!!!!!")
+        # changed to the acceptance page, after picture has been taken
         self.display_stack(1)
+        # stop the video feed from the camera, until enter the page again.
         # self.camera.stop_video_capture()
 
     def accept_picture(self):
         """
-        Summary => Will create a GUI object.
+        Summary => action to take the user to the next page.
 
-        Description =>
+        Description => when this action is given, it will take the user to
+                the style picking page.
 
         Args => None
 
@@ -153,23 +166,29 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def start_plot(self):
         """
-        Summary => Will create a GUI object.
+        Summary => Will initialize the plotting process.
 
-        Description =>
+        Description => will initialize the plotting process from the
+                coordinates given, when the image has been changed in the
+                styling stage.
 
         Args => None
 
         Return => None
         """
         print("plotting")
-        self.plotter = PlotterController(None, 1)
+        # create the plotter conroller (coordinates , scale)
+        # self.plotter = PlotterController(None, 1)
+        # call run, when ready to throw through the process.
         self.plotter.run()
 
     def reject_style(self):
         """
-        Summary => Will create a GUI object.
+        Summary => will reject the current style and ask if they are sure.
 
-        Description =>
+        Description => will reject the current stlye and before returning
+                to the previous stage. The program will ask if they are sure
+                by using a message box.
 
         Args => None
 
@@ -190,9 +209,11 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def reject_picture(self):
         """
-        Summary => Will create a GUI object.
+        Summary => will reject the current picture and ask if they are sure.
 
-        Description =>
+        Description => will reject the current picture and before returning
+                to the previous stage. The program will ask if they are sure
+                by using a message box.
 
         Args => None
 

@@ -100,7 +100,7 @@ class PlotterController(object):
             # place pen at this points location
             x = self.coordinate_to_plotter(point.get_x())
             y = self.coordinate_to_plotter(point.get_y())
-            str_command = "PA {} {};".format(x,y)
+            str_command = "PA {} {};".format(x, y)
             self.ser.write(str_command)
             # put pen down
             self.ser.write('PD;')
@@ -222,12 +222,12 @@ class PlotterController(object):
         str_command = "PA {} {};".format(self.coordinate_to_plotter(
                                       move_to.get_x()),
                                       self.coordinate_to_plotter(
-                                      move_to.get_y))
+                                      move_to.get_y()))
         self.ser.write(str_command)
         # pull pen up
         self.ser.write("PU;")
         # return to current location
-        str_command = "PA {} {};".format(x,y)
+        str_command = "PA {} {};".format(x, y)
         self.ser.write(str_command)
         # put pen down at returned point
         self.ser.write("PD;")
@@ -247,9 +247,7 @@ class PlotterController(object):
 
         Return => int - the plotter value, that has been scaled.
         """
-        value = str(xy_value)
-        value = float(value)
-        return ((value * 40)/self.scale)
+        return round(((xy_value * 40)/self.scale))
 
     def test_coords(self):
         """

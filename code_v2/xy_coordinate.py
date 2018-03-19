@@ -12,6 +12,7 @@ Version => 0.1 - 15/03/2018 - created the basic set up for the xy-coordinate
                 class. This include a methods to get and set the x and y
                 vaulues in the object. There is as well a methods to print The
                 coordinates out.
+           0.2 - 18/03/2018 - removed the num_connections, as is not needed.
 """
 
 
@@ -105,47 +106,27 @@ class XYCoordinate(object):
         """
         self.y = y
 
-    def get_num_connections(self):
-        """
-        Summary => initialize the main window view.
-
-        Description =>
-
-        Args => None
-
-        Return => None
-        """
-        return self.num_connections
-
-    def set_num_connections(self, num):
-        """
-        Summary => initialize the main window view.
-
-        Description =>
-
-        Args => None
-
-        Return => None
-        """
-        self.num_connections = num
-
     def is_drawn(self):
         """
-        Summary => initialize the main window view.
+        Summary => checks if this coordinate has been drawn.
 
-        Description =>
+        Description => checks if this coordinate has been drawn. Will
+                return true, if it has been fully drawn.
 
         Args => None
 
-        Return => None
+        Return => boolean - true - has been drawn.
+                          - false -  has not been drawn yet.
         """
         return self.drawn
 
     def drawn(self):
         """
-        Summary => initialize the main window view.
+        Summary => mark this coordinate as drawn.
 
-        Description =>
+        Description => marks this coordinate as drawn, so that this
+                coordinate will not be drawn again on the plotting
+                device.
 
         Args => None
 

@@ -96,6 +96,8 @@ class PlotterController(object):
 
         Return => None
         """
+        # select pen 1
+        self.ser.write('SP 1;')
         for point in self.coordinates:
             # place pen at this points location
             x = self.coordinate_to_plotter(point.get_x())
@@ -109,9 +111,11 @@ class PlotterController(object):
             # think of it like a compass North, North-East etc.
             self.check_move(point, x, y)
             # mark this point as drawn
-            point.drawn()
+            point.plotted()
             # at end bring pen back up
             self.ser.write("PU;")
+        # select pen 0, disengage pen
+        self.ser.write('SP 0;')
 
     def check_move(self, point, x, y):
         """
@@ -140,7 +144,7 @@ class PlotterController(object):
             # check if it is the same location as current point
             if point != move_to:
                 # check if move_to has already been drawn
-                if not move_to.is_drawn():
+                if not move_to.is_plotted():
                     # check North
                     if self.connection(point, move_to, 0, 1):
                         self.move(point, move_to, x, y)

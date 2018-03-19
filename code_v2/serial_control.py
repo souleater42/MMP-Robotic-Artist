@@ -92,7 +92,7 @@ class SerialControl(object):
         # writes to the serial and converts message to bytes
         self.ser.write(command.encode('utf-8'))
         # will make the program sleep for 100 ms to see if there is a response
-        sleep(0.5)
+        sleep(0.25)
         # returns a response if one exists
         print(command)
         response = self.read_all()

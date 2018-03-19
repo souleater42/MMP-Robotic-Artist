@@ -17,7 +17,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 # QApplication, QMainWindow,
 from gui_view import Ui_mainWindow
-# from plotter_controller import PlotterController
+from plotter_controller import PlotterController
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -178,7 +178,7 @@ class MainWindow(QtWidgets.QMainWindow):
         """
         print("plotting")
         # create the plotter conroller (coordinates , scale)
-        # self.plotter = PlotterController(None, 1)
+        self.plotter = PlotterController(None, 0.1)
         # call run, when ready to throw through the process.
         self.plotter.run()
 

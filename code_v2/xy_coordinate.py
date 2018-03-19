@@ -13,6 +13,10 @@ Version => 0.1 - 15/03/2018 - created the basic set up for the xy-coordinate
                 vaulues in the object. There is as well a methods to print The
                 coordinates out.
            0.2 - 18/03/2018 - removed the num_connections, as is not needed.
+           0.3 - 19/03/2018 - changed the names of drawn and is_drawn to
+           plotter and is_plotter. Otherwise, when drawn() was called.
+           It would overight the drawn varible. As they had the same name.
+
 """
 
 
@@ -106,21 +110,21 @@ class XYCoordinate(object):
         """
         self.y = y
 
-    def is_drawn(self):
+    def is_plotted(self):
         """
-        Summary => checks if this coordinate has been drawn.
+        Summary => checks if this coordinate has been plotted.
 
-        Description => checks if this coordinate has been drawn. Will
+        Description => checks if this coordinate has been plotted. Will
                 return true, if it has been fully drawn.
 
         Args => None
 
-        Return => boolean - true - has been drawn.
-                          - false -  has not been drawn yet.
+        Return => boolean - true - has been plotted.
+                          - false -  has not been plotted yet.
         """
         return self.drawn
 
-    def drawn(self):
+    def plotted(self):
         """
         Summary => mark this coordinate as drawn.
 

@@ -1,6 +1,45 @@
-Hackaday - https://hackaday.io/project/12276-roland-dg-dxy-990/details
-Detailed drawing example - https://www.youtube.com/watch?v=eFgTFn-bhzY
-Manga eye icon - https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFhLrJaK61NZ1IHhl8wg6pMaY_c5-7mURnHijScJSi0WBwt92vzg
-PyQt4 basics - http://zetcode.com/gui/pyqt4/firstprograms/
-PyQt4 tutorial playlist - https://www.youtube.com/playlist?list=PLQVvvaa0QuDdVpDFNq4FwY9APZPGSUyR4
-Raspberry Pi webcam doc - https://www.raspberrypi.org/documentation/usage/webcams/README.md
+10/04/18 - Hackaday - https://hackaday.io/project/12276-roland-dg-dxy-990/details
+10/04/18 - Detailed drawing example - https://www.youtube.com/watch?v=eFgTFn-bhzY
+10/04/18 - Manga eye icon - https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFhLrJaK61NZ1IHhl8wg6pMaY_c5-7mURnHijScJSi0WBwt92vzg
+10/04/18 - PyQt4 basics - http://zetcode.com/gui/pyqt4/firstprograms/
+10/04/18 - PyQt4 tutorial playlist - https://www.youtube.com/playlist?list=PLQVvvaa0QuDdVpDFNq4FwY9APZPGSUyR4
+10/04/18 - Raspberry Pi webcam doc - https://www.raspberrypi.org/documentation/usage/webcams/README.md
+
+
+10/04/18 - linked list - http://interactivepython.org/runestone/static/pythonds/BasicDS/ImplementinganUnorderedListLinkedLists.html
+
+10/04/18 - unit tests - https://docs.python.org/3/library/unittest.html
+10/04/18 - unittest tutorial - https://www.blog.pythonlibrary.org/2016/07/07/python-3-testing-an-intro-to-unittest/
+
+10/04/18 - freecad - https://sharecad.org/
+
+10/04/18 - splot - http://www.swplot.com/splot.htm
+
+10/04/18 - Dithering algorithm - http://www.tannerhelland.com/4660/dithering-eleven-algorithms-source-code/
+
+Canny edge research -
+
+	10/04/18 - https://code.tutsplus.com/tutorials/canny-edge-detector-using-python--cms-30095
+	10/04/18 - https://docs.opencv.org/3.1.0/da/d22/tutorial_py_canny.html
+	10/04/18 - smoothing images - kernals - https://docs.opencv.org/3.1.0/d4/d13/tutorial_py_filtering.html
+	10/04/18 - kernal - https://en.wikipedia.org/wiki/Kernel_(image_processing)
+	10/04/18 - guassion smoothing - https://homepages.inf.ed.ac.uk/rbf/HIPR2/gsmooth.htm
+	10/04/18 - http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_canny/py_canny.html#canny
+	10/04/18 - http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_filtering/py_filtering.html#filtering
+
+	computerphile - image filtering 10/04/18
+		-> https://www.youtube.com/watch?v=uihBwtPIBxM
+		-> https://www.youtube.com/watch?v=sRFM5IEqR2w
+		-> https://www.youtube.com/watch?v=C_zFhWdM4ic&t=278s
+
+open cv ->
+
+	10/04/18 - fps and video capture = > https://www.learnopencv.com/how-to-find-frame-rate-or-frames-per-second-fps-in-opencv-python-cpp/
+	10/04/18 - opencv for beginners => https://courses.learnopencv.com/courses/opencv-for-beginners
+	10/04/18 -Image proccesing with open - cv http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/		
+						py_table_of_contents_imgproc/py_table_of_contents_imgproc.html
+
+	10/04/18 - canny edge detection - http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_canny/py_canny.html#canny
+	10/04/18 - opencv tutorial - https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_tutorials.html
+
+

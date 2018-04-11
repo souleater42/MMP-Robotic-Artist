@@ -10,15 +10,10 @@ Version => 0.1 - 12/03/2018 - create the basic set up for the VideoCapture.
                     with the init method and run method.
            0.2 - 15/03/2018 - added te static variable stopped, to be able to
                     stop the feed in other classes when asked.
-           0.3 - 01/04/2018 -  this class now has the ui being passed to it.
-                    This then allows us to continusly update the ui images on
-                    run time. Also has a image_update method passed to it.
 """
-
+import numpy as np
 import cv2
 import threading
-from PyQt5 import QtCore, QtGui
-from update_images import UpdateImages
 
 
 class VideoCapture(threading.Thread):
@@ -34,9 +29,7 @@ class VideoCapture(threading.Thread):
     None => None
     """
 
-    stopped = False
-
-    def __init__(self, ui, update_method):
+    def __init__(self, ui):
         """
         Summary => will intialize the thread object.
 
@@ -50,9 +43,7 @@ class VideoCapture(threading.Thread):
         """
         super(VideoCapture, self).__init__()
         threading.Thread.__init__(self)
-
         self.ui = ui
-        self.update_method = update_method
 
     def run(self):
         """
@@ -66,36 +57,3 @@ class VideoCapture(threading.Thread):
 
         None => None
         """
-        # use:
-        # v4l2-ctl -d /dev/video0 --all
-        # to find camera details
-        self.cap = cv2.VideoCapture(0)
-
-        captured_frame = None
-        # run loop until stactic variable stopped is changed to true
-        while not VideoCapture.stopped:
-            # check if opened, if not open the capture
-            if self.cap.isOpened() is False:
-                self.cap.open(0)
-            # print("capture video")
-            # capture the camera frame
-            # ret => boolean - this is true if the frame has been read
-            # correctly
-            ret, frame = self.cap.read()
-            if ret is True:
-                cv2.imwrite("Images/vidCap.jpg", frame)
-                pixmap = QtGui.QPixmap("Images/vidCap.jpg")
-                pixmap = pixmap.scaled(498, 300, QtCore.Qt.KeepAspectRatio)
-                self.ui.video_capture.setPixmap(pixmap)
-                self.ui.video_capture.setAlignment(QtCore.Qt.AlignCenter)
-
-                captured_frame = frame
-
-        cv2.imwrite("Images/takenPicture.jpg", captured_frame)
-        cv2.imwrite("Images/vidCap.jpg", cv2.imread("Images/blank.jpg"))
-        self.cap.release()
-        cv2.destroyAllWindows()
-
-        # update images in gui
-        update = UpdateImages(self.ui)
-        update.start()

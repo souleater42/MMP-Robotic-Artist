@@ -9,7 +9,10 @@ Author => Matthew Howard (mah60).
 Version => 0.1 - 24/02/2018 -
 """
 import sys
-from PyQt4 import QtGui, QtCore
+# from PyQt4 import QtGui, QtCore
+from PyQt5.QtGui import QDialog
+from ui_imagedialog import Ui_ImageDialog
+import Robotic_Artist_GUI as main_window
 
 
 class GUI(QtGui.QMainWindow):  # TODO: give a better name e.g. window, Gui is
@@ -20,9 +23,7 @@ class GUI(QtGui.QMainWindow):  # TODO: give a better name e.g. window, Gui is
         Description =>
         """
 
-        app = QtGui.QApplication(sys.argv)
-
-        def __init__(self):
+        def __init__(self, ap):
             """
             Summary => Will create a GUI object.
 
@@ -31,8 +32,12 @@ class GUI(QtGui.QMainWindow):  # TODO: give a better name e.g. window, Gui is
             Args =>
             """
             super(GUI, self).__init__()
+            self.app = ap
+            self.window = QtWidgets.QMainWindow()
 
-            # self.window = QtGui.QWidget()
+            window_view = main_window.Ui_mainWindow()
+            window_view.setupUi(self.window)
+            """
             self.resize(750, 500)
             self.move(150, 150)
             self.setWindowTitle('Robotic artist : Walter')
@@ -84,7 +89,7 @@ class GUI(QtGui.QMainWindow):  # TODO: give a better name e.g. window, Gui is
             self.main_window()
 
             sys.exit(self.app.exec_())
-
+            """
 # -----------------------------------------------------------
 # views
 # -----------------------------------------------------------
@@ -151,7 +156,7 @@ class GUI(QtGui.QMainWindow):  # TODO: give a better name e.g. window, Gui is
 
             Args
             """
-            
+
 # ------------------------------------------------------------
 # Actions
 # ------------------------------------------------------------

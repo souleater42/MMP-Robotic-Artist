@@ -7,17 +7,24 @@ comming from it.
 
 Author => Matthew Howard (mah60).
 Version => 0.1 - 12/03/2018 - has the basic set up for the gui. Created Actions
-to control the transactions in the gui and the class is able to draw the gui
-design from gui_view made in qt designer.
+                        to control the transactions in the gui and the class is
+                        able to draw the gui design from gui_view made in qt
+                        designer.
+           0.2 - 15/03/2018 -> 01/04/2018 - added muiltiple actions for the
+                        individula buttons in the ui. This includes actions to
+                        change pages and take pictures.
 """
 import sys
-# from camera_controller import CameraController
-# from image_proccesor import ImageProccesor
-from PyQt5 import QtCore, QtGui, QtWidgets
+from camera_controller import CameraController
+from image_proccesor import ImageProccesor
+from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 # QApplication, QMainWindow,
 from gui_view import Ui_mainWindow
 from plotter_controller import PlotterController
+from update_images import UpdateImages
+import time
+import cv2
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -46,8 +53,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.move(100, 100)  # move gui to the 100,100 on the screen
         self.setWindowIcon(QtGui.QIcon('Images/Icon.png'))  # sets icon for gui
-        # self.camera = CameraController()
-        # self.image_proccessor = ImageProccesor()
+        self.camera = CameraController(self.ui, self.update_images)
+        self.image_proccessor = ImageProccesor(self.ui)
         # --------------------------------------------------------
         # set menuBar actions
         self.ui.actionExit_Application.setShortcut('Ctrl+Q')
@@ -65,26 +72,11 @@ class MainWindow(QtWidgets.QMainWindow):
         btn = self.ui.yes_no_button.button(self.ui.yes_no_button.No)
         btn.clicked.connect(self.reject_picture)
         # self.ui.yes_no_button.clicked.connect(self.accept_picture)
-        pixmap = QtGui.QPixmap('Images/takenPicture.bmp')
-        pixmap = pixmap.scaled(498, 300, QtCore.Qt.KeepAspectRatio)
-        self.ui.captured_image.setPixmap(pixmap)
-        self.ui.captured_image.show()
-        self.ui.captured_image.setAlignment(QtCore.Qt.AlignCenter)
-        pixmap = pixmap.scaled(100, 100, QtCore.Qt.KeepAspectRatio)
-        self.ui.image_your_picture.setPixmap(pixmap)
-        self.ui.image_your_picture.show()
-        self.ui.btn_continue1.clicked.connect(self.proccess_image)
-        pixmap = QtGui.QPixmap('Images/proccessed_image.bmp')
-        pixmap = pixmap.scaled(498, 300, QtCore.Qt.KeepAspectRatio)
-        self.ui.styled_image.setPixmap(pixmap)
-        self.ui.styled_image.setAlignment(QtCore.Qt.AlignCenter)
         btn = self.ui.yes_no_button2.button(self.ui.yes_no_button.Yes)
         btn.clicked.connect(self.start_plot)
+        self.ui.btn_continue1.clicked.connect(self.proccess_image)
         btn = self.ui.yes_no_button2.button(self.ui.yes_no_button.No)
         btn.clicked.connect(self.reject_style)
-        # pixmap = QtGui.QPixmap("Images/cap.jpg")
-        # pixmap = pixmap.scaled(498, 300, QtCore.Qt.KeepAspectRatio)
-        # self.ui.video_capture.setPixmap(pixmap)
         # self.ui.video_capture.show()
 
 # ------------------------------------------------------------
@@ -112,8 +104,21 @@ class MainWindow(QtWidgets.QMainWindow):
 
         if(i == 0):
             print("starting VideoCapture")
-            # self.camera.start_video_capture(12)
-            # self.ui.captured_image.
+            self.camera.start_video_capture()
+
+    def update_images(self):
+        """
+        Summary => update all images in the ui.
+
+        Description => This method will be called, when any of the non-static
+                images in the ui has been updated.
+
+        Args => None
+
+        Return => None
+        """
+
+
 # ------------------------------------------------------------
 # Actions
 # ------------------------------------------------------------
@@ -131,7 +136,10 @@ class MainWindow(QtWidgets.QMainWindow):
         Return => None
         """
         print("Image processed")
-        # self.image_proccessor.canny_style()
+        self.image_proccessor.boarders()
+        # update images in gui
+        update = UpdateImages(self.ui)
+        update.start()
         self.display_stack(3)
 
     def capture_image(self):
@@ -146,10 +154,14 @@ class MainWindow(QtWidgets.QMainWindow):
         Return => None
         """
         print("taken picture!!!!!")
+        # stop the video feed from the camera, until enter the page again.
+        self.camera.stop_video_capture()
+
+        # sleep to let the program to update, before changing screen
+        time.sleep(5/60)
+
         # changed to the acceptance page, after picture has been taken
         self.display_stack(1)
-        # stop the video feed from the camera, until enter the page again.
-        # self.camera.stop_video_capture()
 
     def accept_picture(self):
         """
@@ -177,8 +189,10 @@ class MainWindow(QtWidgets.QMainWindow):
         Return => None
         """
         print("plotting")
+        # get coordinates
+        coord = self.image_proccessor.get_coordinates()
         # create the plotter conroller (coordinates , scale)
-        self.plotter = PlotterController(None, 0.1)
+        self.plotter = PlotterController(coord, 1)
         # call run, when ready to throw through the process.
         self.plotter.run()
 
@@ -251,6 +265,13 @@ class MainWindow(QtWidgets.QMainWindow):
                                             QMessageBox.No)
         # do actions depending on response
         if choice == QMessageBox.Yes:
+            # close the camera feed, if it is still running
+            self.camera.stop_video_capture()
+            # reset each of the images to blank, when closed
+            cv2.imwrite("Images/takenPicture.jpg", cv2.imread(
+                                                        "Images/blank.jpg"))
+            cv2.imwrite("Images/proccessedImage.jpg", cv2.imread(
+                                                        "Images/blank.jpg"))
             print("Leaving Application")
             sys.exit()
         else:

@@ -13,6 +13,9 @@ functions to read and write to serial connection.
 from the serial connection.
 0.2 - 11/04/2018 - created methods to get the serial controller to wait
 for the plotter to be in the correct location.
+0.2.1 - 11/04/2018 -  fixed the method wait(), was broken as could
+not handle Null values and crashed when that occoured in response,
+section.
 """
 import serial
 from time import sleep
@@ -125,16 +128,17 @@ class SerialControl(object):
                 # get coords to wait for plotter to reach sent coords
                 self.ser.write("OC;".encode('utf-8'))
                 # read response
-                sleep(0.5)
+                sleep(0.1)
 
                 response = self.read_all()
                 # check response to
-                new_response = self.remove_semi(response)
-                # split by space
-                response_list = new_response.split('')
-                # if command and respnse match continue plot
-                if response_list[0] == command_list[1] and response_list[1] == command_list[2]:
-                    break
+                if response is not '':
+                    new_response = self.remove_semi(response)
+                    # split by space
+                    response_list = new_response.split(',')
+                    # if command and respnse match continue plot
+                    if response_list[0] == command_list[1] and response_list[1] == command_list[2]:
+                        break
 
     def remove_semi(self, command):
         """

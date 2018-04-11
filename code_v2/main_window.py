@@ -15,8 +15,8 @@ Version => 0.1 - 12/03/2018 - has the basic set up for the gui. Created Actions
                         change pages and take pictures.
 """
 import sys
-from camera_controller import CameraController
-from image_proccesor import ImageProccesor
+#from camera_controller import CameraController
+#from image_proccesor import ImageProccesor
 from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 # QApplication, QMainWindow,
@@ -24,7 +24,7 @@ from gui_view import Ui_mainWindow
 from plotter_controller import PlotterController
 from update_images import UpdateImages
 import time
-import cv2
+#import cv2
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -53,8 +53,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.move(100, 100)  # move gui to the 100,100 on the screen
         self.setWindowIcon(QtGui.QIcon('Images/Icon.png'))  # sets icon for gui
-        self.camera = CameraController(self.ui, self.update_images)
-        self.image_proccessor = ImageProccesor(self.ui)
+        #self.camera = CameraController(self.ui, self.update_images)
+        #self.image_proccessor = ImageProccesor(self.ui)
         # --------------------------------------------------------
         # set menuBar actions
         self.ui.actionExit_Application.setShortcut('Ctrl+Q')
@@ -104,7 +104,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         if(i == 0):
             print("starting VideoCapture")
-            self.camera.start_video_capture()
+            #self.camera.start_video_capture()
 
     def update_images(self):
         """
@@ -136,7 +136,7 @@ class MainWindow(QtWidgets.QMainWindow):
         Return => None
         """
         print("Image processed")
-        self.image_proccessor.boarders()
+        #self.image_proccessor.boarders()
         # update images in gui
         update = UpdateImages(self.ui)
         update.start()
@@ -155,7 +155,7 @@ class MainWindow(QtWidgets.QMainWindow):
         """
         print("taken picture!!!!!")
         # stop the video feed from the camera, until enter the page again.
-        self.camera.stop_video_capture()
+        #self.camera.stop_video_capture()
 
         # sleep to let the program to update, before changing screen
         time.sleep(5/60)
@@ -190,9 +190,9 @@ class MainWindow(QtWidgets.QMainWindow):
         """
         print("plotting")
         # get coordinates
-        coord = self.image_proccessor.get_coordinates()
+        #coord = self.image_proccessor.get_coordinates()
         # create the plotter conroller (coordinates , scale)
-        self.plotter = PlotterController(coord, 1)
+        self.plotter = PlotterController(None, 1)
         # call run, when ready to throw through the process.
         self.plotter.run()
 
@@ -266,7 +266,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # do actions depending on response
         if choice == QMessageBox.Yes:
             # close the camera feed, if it is still running
-            self.camera.stop_video_capture()
+           # self.camera.stop_video_capture()
             # reset each of the images to blank, when closed
             cv2.imwrite("Images/takenPicture.jpg", cv2.imread(
                                                         "Images/blank.jpg"))

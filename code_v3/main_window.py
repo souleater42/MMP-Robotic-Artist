@@ -153,7 +153,6 @@ class MainWindow(QtGui.QMainWindow):
         pixmap = pixmap.scaled(498, 300, QtCore.Qt.KeepAspectRatio)
         self.ui.styled_image.setPixmap(pixmap)
         self.ui.styled_image.setAlignment(QtCore.Qt.AlignCenter)
-        #print(images[0])
 
     def update_capture(self):
         """
@@ -251,6 +250,7 @@ class MainWindow(QtGui.QMainWindow):
         self.plotter = PlotterController(coord, 1)
         # call run, when ready to throw through the process.
         self.plotter.run()
+
     def reject_style(self):
         """
         Summary => will reject the current style and ask if they are sure.
@@ -322,7 +322,7 @@ class MainWindow(QtGui.QMainWindow):
         # do actions depending on response
         if choice == QMessageBox.Yes:
             # close the camera feed, if it is still running
-           # self.camera.stop_video_capture()
+            self.camera.stop_video_capture()
             # reset each of the images to blank, when closed
             cv2.imwrite("Images/takenPicture.jpg", cv2.imread(
                                                         "Images/blank.jpg"))

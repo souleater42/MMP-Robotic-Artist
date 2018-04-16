@@ -65,14 +65,16 @@ class SerialControl(object):
         return => null if no response or the string of input from incoming
             message
         """
+        #print('read')
         buffer = ""
         # check if there are any expected input from the serial
         while self.ser.in_waiting:
+            # print('true')
             # if there is incomming input, throw into loop and
             # read the loop
             char = self.ser.read()
             # turn byte into ascii
-            char = char.decode("utf-8")
+            #char = char.decode("utf-8")
             # when '\r' appears end reading process
             if char == '\r':
                 break
@@ -80,6 +82,7 @@ class SerialControl(object):
                 # add to buffer
                 # print(char)
                 buffer += char
+        print(buffer)
         return buffer
 
     def write(self, command):
@@ -96,8 +99,9 @@ class SerialControl(object):
         return => string, if there is any response from called command. If not
             the response will be None
         """
+        # print('write')
         # writes to the serial and converts message to bytes
-        self.ser.write(command.encode('utf-8'))
+        self.ser.write(command) # encode('utf-8')
         # will make the program sleep for 100 ms to see if there is a response
         sleep(0.25)
         # if command is PA wait until plotter is in correct location
@@ -120,6 +124,7 @@ class SerialControl(object):
                 to send to the serial, connected to this object.
         return => None
         """
+        #print('wait')
         # remove ';'
         new_command = self.remove_semi(command)
         # check if command is PA
@@ -127,19 +132,22 @@ class SerialControl(object):
         command_list = new_command.split(' ')
         if command_list[0] == 'PA':
             while True:
+                #print('wait loop')
                 # get coords to wait for plotter to reach sent coords
-                self.ser.write("OC;".encode('utf-8'))
+                self.ser.write("OC;") #.encode('utf-8')
+                print('OC;')
                 # read response
                 sleep(0.1)
 
                 response = self.read_all()
+                # print(response + " ---- " + command)
                 # check response to
                 if response is not '':
                     new_response = self.remove_semi(response)
                     # split by space
                     response_list = new_response.split(',')
                     # if command and respnse match continue plot
-                    if response_list[0] == command_list[1] and response_list[1] == command_list[2]:
+                    if float(response_list[0]) == float(command_list[1]) and float(response_list[1]) == float(command_list[2]):
                         break
 
     def remove_semi(self, command):

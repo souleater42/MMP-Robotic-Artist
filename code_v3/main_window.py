@@ -119,12 +119,12 @@ class MainWindow(QtGui.QMainWindow):
             self.connect(update, QtCore.SIGNAL("update_images(PyQt_PyObject)"),
                          self.update_images)
             # intialize the video_capture object
-            video_capture = VideoCapture(self.ui, update)
+            self.video_capture = VideoCapture(self.ui, update)
             # connect video_capture to main gui thread
-            self.connect(video_capture,
+            self.connect(self.video_capture,
                          QtCore.SIGNAL("update_capture()"),
                          self.update_capture)
-            self.camera.start_video_capture(video_capture)
+            self.camera.start_video_capture(self.video_capture)
 
     def update_images(self, images):
         """
@@ -247,7 +247,7 @@ class MainWindow(QtGui.QMainWindow):
         # get coordinates
         coord = self.image_proccessor.get_coordinates()
         # create the plotter conroller (coordinates , scale)
-        self.plotter = PlotterController(coord, 1)
+        self.plotter = PlotterController(coord, 3)
         # call run, when ready to throw through the process.
         self.plotter.run()
 

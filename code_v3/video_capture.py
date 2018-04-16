@@ -75,7 +75,8 @@ class VideoCapture(QtCore.QThread):
 
         None => None
         """
-        time.sleep(0.1/60)
+        # time.sleep(0.1/60)
+        # self.wait()
 
     def run(self):
         """

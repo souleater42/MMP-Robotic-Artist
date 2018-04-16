@@ -80,7 +80,8 @@ class ImageProccesor(object):
         # /19103933/depth-error-in-2d-image-with-opencv-python
         # canny = cv2.Canny(img, 25, 100, L2gradient=False)
         # save the final output
-
+        # change image type to unit 8
+        sobal = np.uint8(sobal)
         # creates a threshold to create a black and white image
         ret, threshold = cv2.threshold(sobal, 25, 255, cv2.THRESH_BINARY_INV)
 

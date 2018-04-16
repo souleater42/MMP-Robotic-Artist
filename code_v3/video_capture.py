@@ -75,7 +75,7 @@ class VideoCapture(QtCore.QThread):
 
         None => None
         """
-        # time.sleep(0.1/60)
+        time.sleep(0.1/60)
         # self.wait()
 
     def run(self):
@@ -105,6 +105,9 @@ class VideoCapture(QtCore.QThread):
             # capture the camera frame
             # ret => boolean - this is true if the frame has been read
             # correctly
+            # will slow down the camera, so it can keep up to
+            # the raspberry pi proccessor
+            time.sleep(0.01)
             ret, frame = self.cap.read()
             if ret is True:
                 cv2.imwrite("Images/vidCap.jpg", frame)

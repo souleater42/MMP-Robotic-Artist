@@ -60,8 +60,6 @@ class PlotterController(object):
         Return => None
         """
         self.ser = serial("/dev/ttyUSB0")
-        for x in coordinates:
-            print(x)
         self.coordinates = coordinates
         self.scale = scale
 

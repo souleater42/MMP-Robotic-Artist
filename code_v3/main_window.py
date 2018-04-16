@@ -247,7 +247,7 @@ class MainWindow(QtGui.QMainWindow):
         # get coordinates
         coord = self.image_proccessor.get_coordinates()
         # create the plotter conroller (coordinates , scale)
-        self.plotter = PlotterController(coord, 3)
+        self.plotter = PlotterController(None, 3)
         # call run, when ready to throw through the process.
         self.plotter.run()
 

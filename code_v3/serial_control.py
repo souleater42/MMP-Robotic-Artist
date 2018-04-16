@@ -65,7 +65,7 @@ class SerialControl(object):
         return => null if no response or the string of input from incoming
             message
         """
-        #print('read')
+        # print('read')
         buffer = ""
         # check if there are any expected input from the serial
         while self.ser.in_waiting:

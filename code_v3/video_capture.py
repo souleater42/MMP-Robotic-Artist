@@ -75,7 +75,7 @@ class VideoCapture(QtCore.QThread):
 
         None => None
         """
-        time.sleep(0.1/60)
+        #time.sleep(0.1/60)
         # self.wait()
 
     def run(self):
@@ -94,6 +94,7 @@ class VideoCapture(QtCore.QThread):
         # v4l2-ctl -d /dev/video0 --all
         # to find camera details
         self.cap = cv2.VideoCapture(0)
+        time.sleep(0.1)
 
         captured_frame = None
         # run loop until stactic variable stopped is changed to true
@@ -107,7 +108,7 @@ class VideoCapture(QtCore.QThread):
             # correctly
             # will slow down the camera, so it can keep up to
             # the raspberry pi proccessor
-            time.sleep(0.01)
+            # time.sleep(0.1)
             ret, frame = self.cap.read()
             if ret is True:
                 height, width, channel = frame.shape
@@ -117,8 +118,9 @@ class VideoCapture(QtCore.QThread):
                 self.emit(QtCore.SIGNAL("update_capture(QImage)"), img)
                 captured_frame = frame
 
+        time.sleep(0.1)
         cv2.imwrite("Images/takenPicture.jpg", captured_frame)
-        cv2.imwrite("Images/vidCap.jpg", cv2.imread("Images/blank.jpg"))
+        #cv2.imwrite("Images/vidCap.jpg", cv2.imread("Images/blank.jpg"))
         self.cap.release()
         cv2.destroyAllWindows()
 

@@ -122,7 +122,7 @@ class MainWindow(QtGui.QMainWindow):
             self.video_capture = VideoCapture(self.ui, update)
             # connect video_capture to main gui thread
             self.connect(self.video_capture,
-                         QtCore.SIGNAL("update_capture()"),
+                         QtCore.SIGNAL("update_capture(QImage)"),
                          self.update_capture)
             self.camera.start_video_capture(self.video_capture)
 
@@ -154,7 +154,7 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.styled_image.setPixmap(pixmap)
         self.ui.styled_image.setAlignment(QtCore.Qt.AlignCenter)
 
-    def update_capture(self):
+    def update_capture(self, img):
         """
         Summary => update the capture image.
 
@@ -168,7 +168,7 @@ class MainWindow(QtGui.QMainWindow):
 
         Return => None
         """
-        pixmap = QtGui.QPixmap("Images/vidCap.jpg")
+        pixmap = QtGui.QPixmap(img)
         pixmap = pixmap.scaled(498, 300, QtCore.Qt.KeepAspectRatio)
         self.ui.video_capture.setPixmap(pixmap)
         self.ui.video_capture.setAlignment(QtCore.Qt.AlignCenter)

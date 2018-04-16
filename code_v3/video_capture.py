@@ -26,7 +26,7 @@ Version => 0.1 - 12/03/2018 - create the basic set up for the VideoCapture.
 import cv2
 import time
 import threading
-from PyQt4 import QtCore
+from PyQt4 import QtCore, QtGui
 
 
 class VideoCapture(QtCore.QThread):
@@ -110,8 +110,11 @@ class VideoCapture(QtCore.QThread):
             time.sleep(0.01)
             ret, frame = self.cap.read()
             if ret is True:
-                cv2.imwrite("Images/vidCap.jpg", frame)
-                self.emit(QtCore.SIGNAL("update_capture()"))
+                height, width, channel = frame.shape
+                bytesPerLine = 3 * width
+                img = QtGui.QImage(frame.data, width, height, bytesPerLine,
+                                   QtGui.QImage.Format_RGB888)
+                self.emit(QtCore.SIGNAL("update_capture(QImage)"), img)
                 captured_frame = frame
 
         cv2.imwrite("Images/takenPicture.jpg", captured_frame)

@@ -57,6 +57,26 @@ class DitheringPlotter(PlotterController):
             self.ser.write(str_command)
             # put pen down
             self.ser.write('PD;')
+            pix_size = 40/self.scale
+            str_command = "RR {} {}".format(pix_size, pix_size)
+            self.ser.write('str_command)
+            self.plot_neighbour(point)
             self.ser.write('PU;')
+            point.plotted()
         # select pen 0 - so no pen
         self.ser.write('SP 1;')
+
+    def plot_neighbour(self, point):
+        for move_to in self.coordinates:
+            # check if it is the same location as current point
+            if point != move_to:
+                # check if move_to has already been drawn
+                if not move_to.is_plotted():
+                    if move_to.get_y() == (point.get_y() + 1):
+                        x = self.coordinate_to_plotter(move_to.get_x())
+                        y = self.coordinate_to_plotter(move_to.get_y())
+                        str_command = "PA {} {};".format(x, y)
+                        self.ser.write(str_command)
+                        str_command = "RR {} {}".format(pix_size, pix_size)
+                        self.ser.write('str_command)
+                        move_to.plotted()

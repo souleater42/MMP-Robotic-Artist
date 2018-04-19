@@ -94,7 +94,6 @@ class Dithering(ImageProccesor):
                 else:  # change white
                     self.error_defusion(img, x, y, (img.item(x, y) - 255))
                     img.itemset((x, y), 255)
-
         return img
 
     def error_defusion(self, img, x, y, modifier):

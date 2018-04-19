@@ -82,7 +82,7 @@ class SerialControl(object):
                 # add to buffer
                 # print(char)
                 buffer += char
-        print(buffer)
+        # print(buffer)
         return buffer
 
     def write(self, command):
@@ -135,7 +135,7 @@ class SerialControl(object):
                 #print('wait loop')
                 # get coords to wait for plotter to reach sent coords
                 self.ser.write("OC;") #.encode('utf-8')
-                print('OC;')
+                #print('OC;')
                 # read response
                 sleep(0.1)
 

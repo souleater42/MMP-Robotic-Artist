@@ -113,7 +113,7 @@ class ImageProccesor(object):
                 if img.item(x, y) == 0:
                     self.coordinates[i] = XYCoordinate(x, y)
                     i = i + 1
-
+        return self.coordinates
         # print(self.coordinates[i - 1])
 
     def get_coordinates(self):
@@ -124,10 +124,10 @@ class ImageProccesor(object):
                 needs to be printed.
 
         args => None
-
         None => None
         """
         self.compress_coordinates()
+
         return self.coordinates
 
     def compress_coordinates(self):
@@ -156,3 +156,48 @@ class ImageProccesor(object):
             new_coord[x] = self.coordinates[x]
         # replace old coordinates array with new one without empty slots
         self.coordinates = new_coord
+
+    def compress_image(self, img):
+        print(img.shape)
+        height = int(round(img.shape[0]/3))
+        width = int(round(img.shape[1]/3))
+        print(str(height) + "," + str(width))
+        resized_image = cv2.resize(img, (width, height))
+        return resized_image
+
+
+#class ColourSets(object):
+#        """
+#        Summary => his class is going to control the proccessing of images.
+#
+#        Description =>
+#
+#        args => None
+#
+#        None => None
+#        """
+
+#        def __init__(self, set):
+#            """
+#            Summary => will initialize the image proccesor.
+#
+#            Description => will initialize the images proccesor, to be used later
+#                        on.
+
+#            args => None
+#
+#            None => None
+#            """
+#            self.set = set
+
+#        def generate_boarder(self):
+#            """
+#            Summary => will initialize the image proccesor.
+
+#            Description => will initialize the images proccesor, to be used later
+#                        on.
+
+#            args => None
+
+#            None => None
+#            """

@@ -32,6 +32,10 @@ from gui_view import Ui_mainWindow
 from plotter_controller import PlotterController
 from update_images import UpdateImages
 import cv2
+
+from dithering import Dithering
+from dithering_plotter import DitheringPlotter
+
 import time
 
 
@@ -62,7 +66,6 @@ class MainWindow(QtGui.QMainWindow):
         self.move(100, 100)  # move gui to the 100,100 on the screen
         self.setWindowIcon(QtGui.QIcon('Images/Icon.png'))  # sets icon for gui
         self.camera = CameraController(self.ui)
-        self.image_proccessor = ImageProccesor(self.ui)
         # --------------------------------------------------------
         # set menuBar actions
         self.ui.actionExit_Application.setShortcut('Ctrl+Q')
@@ -190,7 +193,8 @@ class MainWindow(QtGui.QMainWindow):
         Return => None
         """
         print("Image processed")
-        self.image_proccessor.boarders()
+        self.dithering = Dithering(self.ui, 10)
+        self.dithering.run()
         # update images in gui
         update = UpdateImages(self.ui)
         # connect signal
@@ -245,11 +249,12 @@ class MainWindow(QtGui.QMainWindow):
         """
         print("plotting")
         # get coordinates
-        coord = self.image_proccessor.get_coordinates()
+        coord = self.dithering.get_coordinates()
+        # coord = self.image_proccessor.get_coordinates()
         # create the plotter conroller (coordinates , scale)
-        self.plotter = PlotterController(None, 3)
+        plotter = DitheringPlotter(coord, 1)
         # call run, when ready to throw through the process.
-        self.plotter.run()
+        plotter.run()
 
     def reject_style(self):
         """

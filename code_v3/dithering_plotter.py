@@ -14,6 +14,7 @@ from xy_coordinate import XYCoordinate
 from serial_control import SerialControl as serial
 from plotter_controller import PlotterController
 from time import sleep
+import time
 
 
 class DitheringPlotter(PlotterController):
@@ -48,6 +49,7 @@ class DitheringPlotter(PlotterController):
         self.scale = scale
 
     def run(self):
+        start = time.time()
         # select pen 1
         self.ser.write('SP 1;')
         for point in self.coordinates:
@@ -67,7 +69,11 @@ class DitheringPlotter(PlotterController):
                 self.ser.write('PU;')
                 point.plotted()
         # select pen 0 - so no pen
-        self.ser.write('SP 1;')
+        self.ser.write('SP 0;')
+        end = time.time()
+        seconds = end - start
+        minutes = seconds / 60
+        print("mins :" + str(minutes) + " : seconds : " + str(seconds))
 
     def plot_neighbour(self, point):
         for move_to in self.coordinates:

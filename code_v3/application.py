@@ -28,7 +28,7 @@ def main():
 
     args => None
 
-    None => None
+    return => None
     """
     app = QApplication(sys.argv)
     window = MainWindow()

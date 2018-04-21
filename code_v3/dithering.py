@@ -1,13 +1,29 @@
 """
-Summary => his class is going to control the proccessing of images.
+Summary => will apply the dithering algorithm to the image given.
 
-Description => This class is going to control the proccessing of images, within
-            the program. It will take a the 'takenPicture.jpg' from the Image
-            folder and then stlye it. The output will be a list of x and y
-            coordinates on the pltter.
+Description => This class is going to control the proccessing of images for
+            the dithering algorithm. It will take a the 'takenPicture.jpg'
+            from the Image folder and then stlye it. The output will
+            be a list of x and y coordinates for the plotter to print out
+            later on.
 
 Author => Matthew Howard (mah60).
-Version =>   0.1 -
+Version =>   0.1 - 17/04/2018 - created the basic set up for the dithering
+                    class. This includes code to run the algorithm and apply
+                    the kernal to the formula.
+             0.2 - 18/04/2018 - errors with the diffusion of the code. Meaning
+                    the image is comming out incorrectly.
+
+                    Problem solved on the 19/04/2018. -> Was not applying
+                    error to correct pixels
+
+                    Removed add_to_pixels method.
+            0.3 - 20/04/2018 - working code. Adding comments to the code.
+                    Moved check_pixel method to image_proccesor as the
+                    method can be used over all styles written.
+
+                    Removed un-used code. Look at older versions for
+                    this code if required.
 """
 from __future__ import division
 from image_proccesor import ImageProccesor
@@ -16,19 +32,23 @@ import cv2
 
 class Dithering(ImageProccesor):
     """
-    Summary => his class is going to control the proccessing of images.
+    Summary => will apply the dithering algorithm to the image given.
 
-    Description => This class is going to control the proccessing of images,
-                within the program. It will take a the 'takenPicture.jpg'
-                from the Image folder and then stlye it. The output
-                will be a list of x and y coordinates on the pltter.
+    Description => This class is going to control the proccessing of images for
+                the dithering algorithm. It will take a the 'takenPicture.jpg'
+                from the Image folder and then stlye it. The output will
+                be a list of x and y coordinates for the plotter to print out
+                later on.
+
+                This class inherits ImageProccesor and will take on the
+                individual classes for it.
 
     args => None
 
     None => None
     """
 
-    def __init__(self, ui, ps):
+    def __init__(self, ui):
         """
         Summary => will initialize the image proccesor.
 
@@ -43,188 +63,103 @@ class Dithering(ImageProccesor):
 
         self.ui = ui
 
-        # set the platte_size
-        self.platte_size = ps
-
     def run(self):
         """
-        Summary => will find the boarders in the image taken.
+        Summary => will apply the dithering algorithm to the img saved.
 
-        Description =>
+        Description => Will apply the Floyd-Steinberg Dithering algorithm
+                to the image that was captured in the video capture section.
 
         args => None
 
         None => None
         """
-        # get the image to be processed
+        # get the image to be processed, read in gray
         img = cv2.imread('Images/takenPicture.jpg', 0)
-
+        # reduce the size of the image to fit plotter proportions
         img = self.compress_image(img)
-        print(img.shape)
-        # create a blank img to draw on
-        # https://stackoverflow.com/questions/12881926/
-        # create-a-new-rgb-opencv-image-using-python
-        # blank_image = np.zeros((img.shape[0], img.shape[1], 3), np.uint8)
-        # make the image white
-        # blank_image[:] = (255, 255, 255)
-
+        # apply Floyd-Steinberg dithering algorithm
         img = self.apply_dithering(img)
-
+        # calculate coordinates
         self.coordinates = self.calculate_coordinates(img)
-        print(self.coordinates[2])
-        # change the colour pallate, depending on int given
-        # img_palatte = self.colour_palatte(self.platte_size, img)
-
-        # create sets to divide divering into
-        # dithering_sets = self.dithering_sets(self.platte_size, img)
-
+        # save the processed image
         cv2.imwrite('Images/proccessedImage.jpg', img)
+        # cv2.imwrite('Images/dithering_example.jpg', img)
 
     def apply_dithering(self, img):
+        """
+        Summary => will apply the dithering algorithm to the img given.
 
+        Description => Will apply the Floyd-Steinberg Dithering algorithm
+                to the image that was captured in the video capture section.
+
+        args => img -> 2d numpy array - this image will be processed through
+                dithering algorithm.
+
+        return => img -> 2d numpy array - this image will be image after
+                it has been proccessed.
+        """
+        # find even point to split colour values at.
         split = 255/2
         # go through every pixel and apply matrix
         for x in range(0, img.shape[0]):
             for y in range(0, img.shape[1]):
-                #print(str(img.item(x, y)) + "--------")
+                # print(str(img.item(x, y)) + "--------")
                 # change to black
-                if img.item(x, y) < split:
+                if img.item(x, y) < split:  # change black
+                    # apply error_defusion to surrounding pixels
                     self.error_defusion(img, x, y, img.item(x, y))
+                    # change current pixel colour
                     img.itemset((x, y), 0)
                 else:  # change white
+                    # apply error_defusion to surrounding pixels
                     self.error_defusion(img, x, y, (img.item(x, y) - 255))
+                    # change current pixel colour
                     img.itemset((x, y), 255)
         return img
 
     def error_defusion(self, img, x, y, modifier):
+        """
+        Summary => will calculate Floyd-Steinberg error defusion method.
 
-        #print(str(int(round(modifier*matrix[2][0])) + img.item(x, y)))
+        Description => will calculate Floyd-Steinberg error defusion method
+                through the dithering algorithm. The proccess will be done by
+                applying the following kernal to the pixels around it.
 
+                0               Current Pixel   modifier*7/16
+                modifier*3/16   modifier*5/16   modifier*1/16
+
+                That kernal will go through top left to right of the image
+                and add the values to the pixels around it.
+
+        args => img -> 2d numpy array - this image will be processed through
+                    dithering algorithm.
+                x -> int - x coordinate of the current pixel being looked at.
+                y -> int - y coordinate of the current pixel being looked at.
+                modifier -> float - This is the value of the current pixel.
+                        That will be diffused to the surrounding pixels.
+                        Will be negative if closer to 255 and positive if
+                        closer to 0.
+
+        return => None
+        """
+        # check if pixel to the right of current pixel exists.
         if self.check_pixel(img, x, y, 0, 1):
+            # set new value for corrisponding pixel exists
             img.itemset((x, y+1), (img.item(x, y+1) + (
                                 modifier*(7/16))))
+        # check if pixel to the bottom left of current pixel exists.
         if self.check_pixel(img, x, y, 1, (-1)):
+            # set new value for corrisponding pixel exists
             img.itemset((x+1, y-1), (img.item(x+1, y-1) + (
                                 modifier*(3/16))))
+        # check if pixel below the current pixel exists.
         if self.check_pixel(img, x, y, 1, 0):
+            # set new value for corrisponding pixel exists
             img.itemset((x+1, y), (img.item(x+1, y) + (
                             modifier*(5/16))))
+        # check if pixel to the bottom right of current pixel exists.
         if self.check_pixel(img, x, y, 1, 1):
+            # set new value for corrisponding pixel exists
             img.itemset((x+1, y+1), (img.item(x+1, y+1) + (
                                 modifier*(1/16))))
-
-#    def add_to_pixel(self, img, x, y, change):
-#        if change > 255:
-#            print(">")
-#            change =  change - 255
-#           self.add_to_pixel(img, x, y, change)
-#        elif change < 0:
-#            print("<")
-#            change = change + 255
-#            self.add_to_pixel(img, x, y, change)
-#        else:
-#            #print(change)
-#            img.itemset((x, y), change)
-
-    def check_pixel(self, img, x, y, x_mod, y_mod):
-
-        if ((x + x_mod) > 0) and ((x + x_mod) < img.shape[0]) and ((
-                y + y_mod) > 0) and ((y + y_mod) < img.shape[1]):
-            return True
-        else:
-            return False
-
-
-    # def calculate_avr_sep(self, img):
-    #    average_low = 0
-    #    average_high = 0
-    #    high_count = 0
-    #    low_count = 0
-    #    split = 255/2
-    #    for x in range(0, img.shape[0]):
-    #        for y in range(0, img.shape[1]):
-    #            if img.item(x, y) < split:
-    #                low_count = low_count + 1
-    #                average_low = average_low + img.item(x, y)
-    #            else:
-    #                high_count = high_count + 1
-    #                average_high = average_high + img.item(x, y)
-#
-#        average_low = average_low / low_count
-#        average_high = average_high / high_count
-#
-#        average = average_low + (average_high - average_low)
-#        print(average)
-#        return average
-
-#    def colour_palatte(self, kmean, img):
-#        """
-#        Summary => will find the boarders in the image taken.
-#
-#        Description =>
-#
-#        link for code : last seen : 16/04/2018
-#        https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_ml/
-#        py_kmeans/py_kmeans_opencv/py_kmeans_opencv.html#kmeans-opencv
-#
-#        args => None
-#
-#        None => None
-#        """
-#        Z = img.reshape((-1, 3))
-#
-#        # convert to np.float32
-#        Z = np.float32(Z)
-#
-#        # define criteria, number of clusters(K) and apply kmeans()
-#        criteria = (cv2.TERM_CRITERIA_EPS +
-#                    cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
-#        K = kmean
-#        ret, label, center = cv2.kmeans(Z, K, None, criteria, 10,
-#                                        cv2.KMEANS_RANDOM_CENTERS)
-#
-#        # Now convert back into uint8, and make original image
-#        center = np.uint8(center)
-#        res = center[label.flatten()]
-#        res2 = res.reshape((img.shape))
-#
-#        return res2
-#
-#    def dithering_sets(self, ps, img):
-#        """
-#        Summary => will find the boarders in the image taken.
-#
-#        Description =>
-#
-#        args => None
-#
-#        None => None
-#        """
-#    # generate list of intensities (calculate percentage)/divide to decimal
-#        intensity = (100/ps)/100
-#        self.ranges = np.zeros((ps+2, 3), dtype=int)
-#        # set 0 and 100
-#        self.ranges[0][0] = 0  # black
-#        self.ranges[0][1] = 0
-#        self.ranges[0][2] = 0
-#        self.ranges[ps+1][0] = 255  # white
-#        self.ranges[ps+1][1] = 255
-#        self.ranges[ps+1][2] = ps + 1
-#        # generate ranges
-#        for i in range(0, ps):
-#            value = int(round(255 * (intensity * (i+1))))
-#            if i == 0:   # set first range
-#                self.ranges[i+1][0] = 1
-#                self.ranges[i+1][1] = value
-#                self.ranges[i+1][2] = i + 1
-#            elif i == (ps-1):  # set last range
-#                self.ranges[i+1][0] = self.ranges[i][1]
-#                self.ranges[i+1][1] = 254
-#                self.ranges[i+1][2] = i + 1
-#            else:  # find inbertween ranges
-#                self.ranges[i+1][0] = self.ranges[i][1]
-#                self.ranges[i+1][1] = value
-#                self.ranges[i+1][2] = i + 1
-
-#        print(self.ranges)
-#        used_pixels = np.zeros(img.size, dtype=XYCoordinate)

@@ -27,7 +27,7 @@ class UpdateImages(QtCore.QThread):
 
     args => None
 
-    None => None
+    return => None
     """
 
     def __init__(self, ui):
@@ -39,7 +39,7 @@ class UpdateImages(QtCore.QThread):
 
         args => ui - this is the ui object for the gui_view
 
-        None => None
+        return => None
         """
         super(UpdateImages, self).__init__()
         QtCore.QThread.__init__(self)
@@ -60,7 +60,7 @@ class UpdateImages(QtCore.QThread):
 
         args => None
 
-        None => None
+        return => None
         """
         images = ["Images/takenPicture.jpg", "Images/proccessedImage.jpg"]
         self.emit(QtCore.SIGNAL("update_images(PyQt_PyObject)"), images)

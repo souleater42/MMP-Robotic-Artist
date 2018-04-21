@@ -28,7 +28,7 @@ class CameraController(object):
 
     args => None
 
-    None => None
+    return => None
     """
 
     def __init__(self, ui):
@@ -40,7 +40,7 @@ class CameraController(object):
 
         args => None
 
-        None => None
+        return => None
         """
         self.ui = ui
 
@@ -53,7 +53,7 @@ class CameraController(object):
 
         args => None
 
-        None => None
+        return => None
         """
         # change static boolean to False
         VideoCapture.stopped = False
@@ -70,7 +70,7 @@ class CameraController(object):
                     video to be captured in.
         args => None
 
-        None => None
+        return => None
         """
         # changes static boolean to true, this stops the thread running in the
         # the background

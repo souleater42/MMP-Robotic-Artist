@@ -21,6 +21,7 @@ Version => 0.1 - 12/03/2018 - create the basic set up for the VideoCapture.
                     http://euanfreeman.co.uk/pyqt-qpixmap-and-threads/ is
                     the link that I used to help develop the signal connection.
                     last_seen: 15/04/2018
+           0.5 - 20/04/2018 - removed __del__ code. As it had no code inside.
 """
 
 import cv2
@@ -38,7 +39,7 @@ class VideoCapture(QtCore.QThread):
 
     args => None
 
-    None => None
+    return => None
     """
 
     stopped = False
@@ -52,30 +53,13 @@ class VideoCapture(QtCore.QThread):
 
         args => None
 
-        None => None
+        return => None
         """
         super(VideoCapture, self).__init__()
         QtCore.QThread.__init__(self)
 
         self.ui = ui
         self.update_thread = update_thread
-
-    def __del__(self):
-        """
-        Summary => sleeps the thread if the thread is being deleted.
-
-        Description => "that prevents the thread from being garbage
-                    collected while running."
-                    qouted from -
-                    http://euanfreeman.co.uk/pyqt-qpixmap-and-threads/
-                    last_seen: 15/04/2018
-
-        args => None
-
-        None => None
-        """
-        #time.sleep(0.1/60)
-        # self.wait()
 
     def run(self):
         """
@@ -87,7 +71,7 @@ class VideoCapture(QtCore.QThread):
 
         args => None
 
-        None => None
+        return => None
         """
         # use:
         # v4l2-ctl -d /dev/video0 --all

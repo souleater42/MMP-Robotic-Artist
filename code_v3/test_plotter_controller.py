@@ -25,9 +25,9 @@ class TestPlotterController(unittest.TestCase):
 
                 Will only test the methods needed
 
-    Args => None
+    args => None
 
-    Return => None
+    return => None
     """
 
     # @unittest.skipUnless()
@@ -38,9 +38,9 @@ class TestPlotterController(unittest.TestCase):
         Description => will test if the value returned from the
                     coordinate to plotter method is correct.
 
-        Args => None
+        args => None
 
-        Return => None
+        return => None
         """
         # creating the plotter controller, with no coordinates and a scale
         # of 1

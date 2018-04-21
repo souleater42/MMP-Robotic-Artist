@@ -18,6 +18,22 @@ Version =>   0.1 - 12/03/2018 - set up basic set up for the class
                         python3. No changes needed.
              0.3.1 - 15/04/2018 - created a method to compress the
                         self.coordinates array. To remove any unwanted values.
+             0.3.2 - 16/04/2018 - created a ColourSets class to control to
+                        create areas where the pixels in that area had the
+                        same colour. Going to use for dithering.
+             0.4 - 17/04/2018 - created the methods compress_image to reduce
+                        the size of images handed to it. As well, made
+                        this class a parent class. In which stlye proccessing
+                        will be inheriting this class.
+
+                        commented out colour sets class as the class is not
+                        required for the dithering algorithm.
+             0.4.1 - 20/04/2018 - moved the check_pixel method to
+                        ImageProccesor class as it will be used generically
+                        throughout other classes as well.
+
+                        created run() method that will tell the user that
+                        the proccessor is incorrect.
 """
 from xy_coordinate import XYCoordinate
 import numpy as np
@@ -35,7 +51,7 @@ class ImageProccesor(object):
 
     args => None
 
-    None => None
+    return => None
     """
 
     def __init__(self, ui):
@@ -47,47 +63,26 @@ class ImageProccesor(object):
 
         args => ui -> this is the qt window. The Gui_view
 
-        None => None
+        return => None
         """
         self.ui = ui
 
-    def boarders(self):
+    def run(self):
         """
-        Summary => will find the boarders in the image taken.
+        Summary => running a blank proccesor.
 
-        Description => will find the boarders in the image take, using
-                opencv. The will work by making the image graystyle, then
-                using a GaussianBlur to filter the image. Then using sobal
-                to calculate where the edges are.
-
-                After this we use a threshold to swap the black and white
-                colours around.
+        Description => will print error message. As they are running a black
+                proccesor.
 
         args => None
 
-        None => None
+        return => None
         """
-        # get the image to be processed
-        img = cv2.imread('Images/takenPicture.jpg', 0)
-        # img_edges = cv2.Canny(img, 80, 80)
-        # blur the image so we can tell where the key boarders are
-        blur = cv2.GaussianBlur(img, (9, 9), 0)
-        # create a sobal diratives
-        sobal = cv2.Sobel(blur, cv2.CV_64F, 1, 1, ksize=5)
-        # convert the sobal diratives to canny_style
-        # to view the edges of the image
-        # sobalCopy = np.uint8(sobal) #  https://stackoverflow.com/questions
-        # /19103933/depth-error-in-2d-image-with-opencv-python
-        # canny = cv2.Canny(img, 25, 100, L2gradient=False)
-        # save the final output
-        # change image type to unit 8
-        sobal = np.uint8(sobal)
-        # creates a threshold to create a black and white image
-        ret, threshold = cv2.threshold(sobal, 25, 255, cv2.THRESH_BINARY_INV)
-
-        cv2.imwrite("Images/proccessedImage.jpg", threshold)
-
-        self.calculate_coordinates(threshold)
+        print("-------------------------------------------------------")
+        print("error: procccessor is empty.")
+        print("       Advice:")
+        print("              procccessor is wrong type.")
+        print("-------------------------------------------------------")
 
     def calculate_coordinates(self, img):
         """
@@ -99,7 +94,7 @@ class ImageProccesor(object):
 
         args => img => this is a jpg image and has a dtype8.
 
-        None => None
+        return => None
         """
         # generate x and y coordinates
         self.coordinates = np.zeros(img.size, dtype=XYCoordinate)
@@ -124,7 +119,7 @@ class ImageProccesor(object):
                 needs to be printed.
 
         args => None
-        None => None
+        return => None
         """
         self.compress_coordinates()
 
@@ -142,7 +137,7 @@ class ImageProccesor(object):
 
         args => None
 
-        None => None
+        return => None
         """
         # count all the values that are not zero
         i = 0
@@ -158,46 +153,52 @@ class ImageProccesor(object):
         self.coordinates = new_coord
 
     def compress_image(self, img):
-        print(img.shape)
+        """
+        Summary => compress the size of the image given.
+
+        Description => will change the size of the image by 1/3 of its
+                original size. This is done using opencv.
+
+                The scale was determined by the resolution of the camera
+                it was taken in and then reduced down to fit onto the plotters
+                scale.
+
+        args => img -> opencv image. This will be a numpy array format.
+
+        return => resized_image -> image when it has been resized
+        """
+        # print(img.shape)
+        # calculate the height and width of new compress_image
+        # the size will be 1/3 of its original size.
         height = int(round(img.shape[0]/3))
         width = int(round(img.shape[1]/3))
-        print(str(height) + "," + str(width))
+        # print(str(height) + "," + str(width))
+        # use opencv to resize the image given.
         resized_image = cv2.resize(img, (width, height))
         return resized_image
 
+    def check_pixel(self, img, x, y, x_mod, y_mod):
+        """
+        Summary => checks if the given pixel exists.
 
-#class ColourSets(object):
-#        """
-#        Summary => his class is going to control the proccessing of images.
-#
-#        Description =>
-#
-#        args => None
-#
-#        None => None
-#        """
+        Description => checks if the given pixels exists and returns True. If
+                it does.
 
-#        def __init__(self, set):
-#            """
-#            Summary => will initialize the image proccesor.
-#
-#            Description => will initialize the images proccesor, to be used later
-#                        on.
+        args => img -> 2d numpy array - this image will be processed through
+                    dithering algorithm.
+                x -> int - x coordinate of the current pixel being looked at.
+                y -> int - y coordinate of the current pixel being looked at.
+                x_mod -> int - the modifier for the pixel that is wanting to
+                    be looked at from the current pixel.
+                y_mod -> int - the modifier for the pixel that is wanting to
+                    be looked at from the current pixel.
 
-#            args => None
-#
-#            None => None
-#            """
-#            self.set = set
-
-#        def generate_boarder(self):
-#            """
-#            Summary => will initialize the image proccesor.
-
-#            Description => will initialize the images proccesor, to be used later
-#                        on.
-
-#            args => None
-
-#            None => None
-#            """
+        return => None
+        """
+        # check if the pixel wanting to be looked at is within the boundries
+        # of the image that is given.
+        if ((x + x_mod) > 0) and ((x + x_mod) < img.shape[0]) and ((
+                y + y_mod) > 0) and ((y + y_mod) < img.shape[1]):
+            return True
+        else:
+            return False

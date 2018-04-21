@@ -117,9 +117,9 @@ class XYCoordinate(object):
         Description => checks if this coordinate has been plotted. Will
                 return true, if it has been fully drawn.
 
-        Args => None
+        args => None
 
-        Return => boolean - true - has been plotted.
+        return => boolean - true - has been plotted.
                           - false -  has not been plotted yet.
         """
         return self.drawn
@@ -132,9 +132,9 @@ class XYCoordinate(object):
                 coordinate will not be drawn again on the plotting
                 device.
 
-        Args => None
+        args => None
 
-        Return => None
+        return => None
         """
         self.drawn = True
 

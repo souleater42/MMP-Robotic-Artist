@@ -6,18 +6,18 @@ There are methods to read and send messages to the serial given to it.
 
 Author => Matthew Howard (mah60).
 Version =>
-0.1 - 23/02/2018 - intial set up for the class, this will be
-    initialization of the serial connection at creation of serial. As well,
-    functions to read and write to serial connection.
-0.1.1 - 26/02/2018 -  made some print commands to print input and output
-    from the serial connection.
-0.2 - 11/04/2018 - created methods to get the serial controller to wait
-    for the plotter to be in the correct location.
-0.2.1 - 11/04/2018 -  fixed the method wait(), was broken as could
-    not handle Null values and crashed when that occoured in response,
-    section.
-0.3 - 15/04/2018 - update change code to support python2 instead
-    of python3. No changes made.
+        0.1 - 23/02/2018 - intial set up for the class, this will be
+            initialization of the serial connection at creation of serial.
+            As well, functions to read and write to serial connection.
+        0.1.1 - 26/02/2018 -  made some print commands to print input
+            and output from the serial connection.
+        0.2 - 11/04/2018 - created methods to get the serial controller to wait
+            for the plotter to be in the correct location.
+        0.2.1 - 11/04/2018 -  fixed the method wait(), was broken as could
+            not handle Null values and crashed when that occoured in response,
+            section.
+        0.3 - 15/04/2018 - update change code to support python2 instead
+            of python3. No changes made.
 """
 import serial
 from time import sleep
@@ -31,6 +31,10 @@ class SerialControl(object):
         and outputs to the serial given to the object. This object will store
         the serial connection link as 'ser'. Also, will store all serial ports
         values as variables.
+
+        args => None
+
+        return => None
     """
 
     def __init__(self, sp, b='9600', sb=1, p='E'):
@@ -41,11 +45,13 @@ class SerialControl(object):
         connection. The serial_port, stopbits, baund and parity will be stored
         to access later. Will initialize the serial as ser.
 
-        Args =>
+        args =>
             sp = serial_port = serial port that you wish to connet to
             sb = stopbits = the amount of stopbits you want. default = 1
             b = baund = the baund speed. default = '9600'
             p = parity = the parity of the serial. default = 'E'
+
+        return => None
         """
         self.serial_port = sp
         self.stopbits = sb
@@ -62,6 +68,8 @@ class SerialControl(object):
         If there is no input from the serial the session will time out and
         return to the normal process.
 
+        args => None
+
         return => null if no response or the string of input from incoming
             message
         """
@@ -74,7 +82,7 @@ class SerialControl(object):
             # read the loop
             char = self.ser.read()
             # turn byte into ascii
-            #char = char.decode("utf-8")
+            # char = char.decode("utf-8") - use if python3
             # when '\r' appears end reading process
             if char == '\r':
                 break
@@ -93,7 +101,7 @@ class SerialControl(object):
             will read from the serial to see if there is a returned message.
             If not will return none.
 
-        arguments =>
+        args =>
             command => this will be a string of the command you want
                 to send to the serial, connected to this object.
         return => string, if there is any response from called command. If not
@@ -101,15 +109,15 @@ class SerialControl(object):
         """
         # print('write')
         # writes to the serial and converts message to bytes
-        self.ser.write(command) # encode('utf-8')
+        self.ser.write(command)  # encode('utf-8')
         # will make the program sleep for 100 ms to see if there is a response
         sleep(0.25)
         # if command is PA wait until plotter is in correct location
         self.wait(command)
         # returns a response if one exists
-        print(command)
+        # print(command)
         response = self.read_all()
-        print(response + "-----")
+        # print(response + "-----")
         return response
 
     def wait(self, command):
@@ -119,7 +127,7 @@ class SerialControl(object):
         Description => will check if the plotter is at the location is given
                 before sending the PA command.
 
-        arguments =>
+        args =>
             command => this will be a string of the command you want
                 to send to the serial, connected to this object.
         return => None
@@ -132,10 +140,8 @@ class SerialControl(object):
         command_list = new_command.split(' ')
         if command_list[0] == 'PA':
             while True:
-                #print('wait loop')
                 # get coords to wait for plotter to reach sent coords
-                self.ser.write("OC;") #.encode('utf-8')
-                #print('OC;')
+                self.ser.write("OC;")  # .encode('utf-8') - use for python3
                 # read response
                 sleep(0.1)
 
@@ -147,7 +153,9 @@ class SerialControl(object):
                     # split by space
                     response_list = new_response.split(',')
                     # if command and respnse match continue plot
-                    if float(response_list[0]) == float(command_list[1]) and float(response_list[1]) == float(command_list[2]):
+                    if float(response_list[0]) == float(
+                            command_list[1]) and float(
+                            response_list[1]) == float(command_list[2]):
                         break
 
     def remove_semi(self, command):
@@ -156,13 +164,15 @@ class SerialControl(object):
 
         Description => will remove semicolon from given command.
 
-        arguments =>
+        args =>
             command => this will be a string of the command you want
                 to send to the serial, connected to this object.
         return => str => this is the command without a semicolon on the end
         """
         # remove ;
         c_list = list(command)
+        # checks if the last value if the list is a ';'. If so turns the
+        # value to space.
         if c_list[len(c_list) - 1] == ';':
             c_list[len(c_list) - 1] = ' '
         return ''.join(c_list)

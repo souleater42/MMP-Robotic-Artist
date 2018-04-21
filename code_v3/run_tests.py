@@ -22,9 +22,9 @@ def run_tests():
             Used :
     https://www.blog.pythonlibrary.org/2016/07/07/python-3-testing-an-intro-to-unittest/
                     for basic tutorial on how to create unit tests in python.
-    Args => None
+    args => None
 
-    Return => None
+    return => None
     """
     print('--------------------------------------------------------------')
     print('starting tests')

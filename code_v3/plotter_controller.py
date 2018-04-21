@@ -20,13 +20,29 @@ Version => 0.1 - 15/03/2018 - This is the basic set up to this class.
                 move(), coordinate_to_plotter(), test_coords() have been made.
            0.2 - 15/04/2018 - update change code to support python2 instead
                 of python3. No changes made.
+           0.3 - 20/04/2018 - moving code to do with plotting coordinate for
+                edges stlye to its own class. That inherits this one. This
+                is because the methods moved are not gerneric to all the
+                plotter_controllers.
+
+                The methods moved are;
+                    run(), draw(), check_move(), connection(), move()
+
+                Created a run() message for this thread. Saying you are running
+                the wrong thread.
+
+                Created time_start and time_stop methods to time how long
+                a plot will take.
+
 """
 from xy_coordinate import XYCoordinate
 from serial_control import SerialControl as serial
+import threading
+import time
 import numpy as np
 
 
-class PlotterController(object):
+class PlotterController(threading.Thread):
     """
     Summary => will control the proccess to plot out the coordinates given.
 
@@ -36,12 +52,12 @@ class PlotterController(object):
             This will make connections between each coordinate and draw
             lines between them.
 
-    Args => coordinates - list - a list of xy coordinates.
+    args => coordinates - list - a list of xy coordinates.
             scale - float - this will be the scale of which you want to be
                     drawn at. e.g. half the size will be 2 and double the
                     size will be 0.5
 
-    Return => None
+    return => None
     """
 
     def __init__(self, coordinates, scale):
@@ -52,12 +68,12 @@ class PlotterController(object):
             of coordinates and place them into a list until the method run()
             is called. To start the process.
 
-        Args => coordinates - list - a list of xy coordinates
+        args => coordinates - list - a list of xy coordinates
                 scale - float - this will be the scale of which you want to be
                         drawn at. e.g. half the size will be 2 and double the
                         size will be 0.5
 
-        Return => None
+        return => None
         """
         self.ser = serial("/dev/ttyUSB0")
         self.coordinates = coordinates
@@ -65,179 +81,20 @@ class PlotterController(object):
 
     def run(self):
         """
-        Summary => run the PlotterController.
+        Summary => running a blank thread.
 
-        Description => will run the plotter controller, this will take the
-            coordinates given and turn them into lines. Using a linked-list
-            format.
+        Description => will print error message. As they are running a black
+                thread.
 
-            After the lines have been made it will print out the list of lines
+        args => None
 
-
-        Args => None
-
-        Return => None
+        return => None
         """
-        if self.coordinates is None:
-            self.test_coords()  # generate a bunch of test_coords
-        self.draw()
-
-    def draw(self):
-        """
-        Summary => draw the list of coordinates.
-
-        Description => will loop through the list of coordinates given. Then
-            will move to the given point and put the pen down. The method will
-            proceed to find all connections to that point and draw to the new
-            location. Then will return to the current location.
-
-            After complete each coordinate value will be set to drawn,
-            when then have been checked. So the program does not return to
-            that location when drawing the other locations.
-
-        Args => None
-
-        Return => None
-        """
-        # select pen 1
-        self.ser.write('SP 1;')
-        for point in self.coordinates:
-            # place pen at this points location
-            x = self.coordinate_to_plotter(point.get_x())
-            y = self.coordinate_to_plotter(point.get_y())
-            str_command = "PA {} {};".format(x, y)
-            self.ser.write(str_command)
-            # put pen down
-            self.ser.write('PD;')
-
-            # check if there is a connection in each direction,
-            # think of it like a compass North, North-East etc.
-            self.check_move(point, x, y)
-            # mark this point as drawn
-            point.plotted()
-            # at end bring pen back up
-            self.ser.write("PU;")
-        # select pen 0, disengage pen
-        self.ser.write('SP 0;')
-
-    def check_move(self, point, x, y):
-        """
-        Summary => check where the plotter can move to.
-
-        Description => will check in all directions, north, west, north-West
-            etc. To see where the pen can move_to following the constraits of
-            other coordinates to this one.
-
-            If the location has a connection to another point it will draw
-            to that point and then return.
-
-            Will check first if that point has already been drawn out to
-            reduce the amount of cross overs.
-
-        Args => point - XYCoordinate - this is the current location
-                        coordinates.
-                x - int - the x location of the current coordinate translated
-                        to the plotters coordinates.
-                y - int - the y location of the current coordinate translated
-                        to the plotters coordinates.
-
-        Return => None
-        """
-        for move_to in self.coordinates:
-            # check if it is the same location as current point
-            if point != move_to:
-                # check if move_to has already been drawn
-                if not move_to.is_plotted():
-                    # check North
-                    if self.connection(point, move_to, 0, 1):
-                        self.move(point, move_to, x, y)
-                    # check North-East
-                    if self.connection(point, move_to, 1, 1):
-                        self.move(point, move_to, x, y)
-                    # check East
-                    if self.connection(point, move_to, 1, 0):
-                        self.move(point, move_to, x, y)
-                    # check South-East
-                    if self.connection(point, move_to, 1, -1):
-                        self.move(point, move_to, x, y)
-                    # check South
-                    if self.connection(point, move_to, 0, -1):
-                        self.move(point, move_to, x, y)
-                    # check South-West
-                    if self.connection(point, move_to, -1, -1):
-                        self.move(point, move_to, x, y)
-                    # check West
-                    if self.connection(point, move_to, -1, 0):
-                        self.move(point, move_to, x, y)
-                    # check North-West
-                    if self.connection(point, move_to, -1, 1):
-                        self.move(point, move_to, x, y)
-
-    def connection(self, point, move_to, x_modifier, y_modifier):
-        """
-        Summary => check if there is a connection between two points.
-
-        Description => will check if there is a connection between two points,
-            using a the x and y x_modifier to the current location of the pen.
-
-            This will check if they are within the distance of connection of
-            each other. To be able to connect to each other.
-
-        Args => point - XYCoordinate - this is the current location
-                        coordinates.
-                move_to - XYCoordinate - this is the location of the
-                        point that we may be moving to. If the test is
-                        passed
-                x_modifier - int - the modifier to the x plane, to compare if
-                        it can move to given area.
-                y_modifier - int -  the modifier to the y plane, to compare if
-                        it can move to given area.
-
-        Return => True if the two points match, when the current location is
-                    modifed.
-        """
-        # check if both the y and x location are the same to the move_to point
-        if ((point.get_x() + x_modifier) == move_to.get_x()) and (
-                    (point.get_y() + y_modifier) == move_to.get_y()):
-            # if they are the same when modifed return true
-            return True
-        else:
-            # if they are not the same when modifed return false
-            return False
-
-    def move(self, point, move_to, x, y):
-        """
-        Summary => move to the new location and returns to point.
-
-        Description => will move_to the new location given. After
-                this the pen will be brought up and returns back to the
-                current location point.
-
-        Args => point - XYCoordinate - this is the current location
-                        coordinates.
-                move_to - XYCoordinate - this is the new location
-                                coordinates.
-                x - int - the x location of the current coordinate translated
-                        to the plotters coordinates.
-                y - int - the y location of the current coordinate translated
-                        to the plotters coordinates.
-
-        Return => int - the plotter value, that has been scaled.
-        """
-        # move pen to new found location, then return to current
-        # point location
-        str_command = "PA {} {};".format(self.coordinate_to_plotter(
-                                      move_to.get_x()),
-                                      self.coordinate_to_plotter(
-                                      move_to.get_y()))
-        self.ser.write(str_command)
-        # pull pen up
-        self.ser.write("PU;")
-        # return to current location
-        str_command = "PA {} {};".format(x, y)
-        self.ser.write(str_command)
-        # put pen down at returned point
-        self.ser.write("PD;")
+        print("-------------------------------------------------------")
+        print("error: plotter thread is empty.")
+        print("       Advice:")
+        print("              plotter is wrong type.")
+        print("-------------------------------------------------------")
 
     def coordinate_to_plotter(self, xy_value):
         """
@@ -249,12 +106,46 @@ class PlotterController(object):
             The final value will be devided by the scale. Making it so
             the final result can be scaled up or down.
 
-        Args => xy_value - int - the curret coordinate value, that wants to
+        args => xy_value - int - the curret coordinate value, that wants to
                     be translated to plotter values.
 
-        Return => int - the plotter value, that has been scaled.
+        return => int - the plotter value, that has been scaled.
         """
         return round(((xy_value * 40)/self.scale))
+
+    def time_start(self):
+        """
+        Summary => starts timer on plotter.
+
+        Description => starts timer on plotter.
+
+        args => None
+
+        return => None
+        """
+        self.start = time.time()
+
+    def time_stop(self):
+        """
+        Summary => stops timer on plotter.
+
+        Description => stops timer on plotter and prints out final
+                result on plotter though hours.
+
+        args => None
+
+        return => None
+        """
+        # get end plot time
+        self.end = time.time()
+        # get the amount of seconds the plotter has been going for
+        seconds = self.end - self.start
+        minutes = seconds / 60
+        hours = minutes / 60
+        # This is the amound of time the plotter took to print.
+        print("-------------------------------------------------------")
+        print("hours : {0:.2f}".format(hours))
+        print("-------------------------------------------------------")
 
     def test_coords(self):
         """
@@ -263,9 +154,9 @@ class PlotterController(object):
         Description => will create test values for the coordinates. To
         be sent through the plotting stages.
 
-        Args => None
+        args => None
 
-        Return => None
+        return => None
         """
         self.coordinates = np.zeros(16, dtype=XYCoordinate)
         self.coordinates[0] = XYCoordinate(1, 1)

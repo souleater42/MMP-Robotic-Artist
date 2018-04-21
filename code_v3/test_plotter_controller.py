@@ -30,7 +30,8 @@ class TestPlotterController(unittest.TestCase):
     return => None
     """
 
-    # @unittest.skipUnless()
+    @unittest.skip('Skip: test_coordinate_to_plotter;'
+                   + 'as not connected to serial')
     def test_coordinate_to_plotter(self):
         """
         Summary => test coordinate to plotter.

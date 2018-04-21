@@ -10,6 +10,7 @@ Version => 0.1 - 18/03/2018 - created basic version of test suite.
 import unittest
 
 from test_plotter_controller import TestPlotterController as TPlot
+from test_image_proccessor import TestImageProccesor as IPro
 
 
 def run_tests():
@@ -20,7 +21,8 @@ def run_tests():
             tests.
 
             Used :
-    https://www.blog.pythonlibrary.org/2016/07/07/python-3-testing-an-intro-to-unittest/
+    https://www.blog.pythonlibrary.org/2016/07/07/
+    python-3-testing-an-intro-to-unittest/
                     for basic tutorial on how to create unit tests in python.
     args => None
 
@@ -36,6 +38,7 @@ def run_tests():
     # add to test TestSuite
     # -------------------------------------------------------------------
     suite.addTest(unittest.makeSuite(TPlot))
+    suite.addTest(unittest.makeSuite(IPro))
     # -------------------------------------------------------------------
     # run TestSuite
     runner = unittest.TextTestRunner()

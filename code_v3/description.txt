@@ -1,0 +1,8 @@
+The project that has been undertaken, is to create a robotic artist using the Roland DXY-990 to draw out artistic portraits developed by the code within the Raspberry Pi.
+
+The robotic artists can take a picture of the user that is in front of the camera. Then once this is complete the user can select a specific style for the plotted output to look like.
+
+The article that this project was developed from "Paul the Robot"[1], which talks about how they designed a robotic arm and a camera to be a naive draw. This leads to the artist cannot recognize any facial feature but draws offline recognition and image modification.
+
+[1] "Portrait drawing by Paul the robot", a paper by Patrick Tresset and Frederic Fol Leymarie, Goldsmiths College. ; 05/03/2018;
+     http://doc.gold.ac.uk/~ma701pt/patricktresset/wp-content/uploads/2015/03/computerandgraphicstresset.pdf

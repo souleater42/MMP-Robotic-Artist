@@ -44,7 +44,7 @@ class EdgeStylePlotter(PlotterController):
                                 coordinates/scale
         return => None
         """
-        super(DitheringPlotter, self).__init__(coordinates, scale)
+        super(EdgeStylePlotter, self).__init__(coordinates, scale)
         # create connection with serial to the plotter.
         self.ser = serial("/dev/ttyUSB0")
         # assign given values to object.

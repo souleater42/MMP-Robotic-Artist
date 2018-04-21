@@ -23,7 +23,9 @@ Version =>   0.1 - 17/04/2018 - created the basic set up for the dithering
                     method can be used over all styles written.
 
                     Removed un-used code. Look at older versions for
-                    this code if required.
+                    this code if reqargsred.
+             0.3.1 - 21/04/2018 - removed ui from __init_- method as not
+                        used
 """
 from __future__ import division
 from image_proccesor import ImageProccesor
@@ -48,20 +50,18 @@ class Dithering(ImageProccesor):
     None => None
     """
 
-    def __init__(self, ui):
+    def __init__(self):
         """
         Summary => will initialize the image proccesor.
 
         Description => will initialize the images proccesor, to be used later
                     on.
 
-        args => ui -> this is the qt window. The Gui_view
+        args => None
 
         None => None
         """
-        super(Dithering, self).__init__(ui)
-
-        self.ui = ui
+        super(Dithering, self).__init__()
 
     def run(self):
         """
@@ -77,7 +77,7 @@ class Dithering(ImageProccesor):
         # get the image to be processed, read in gray
         img = cv2.imread('Images/takenPicture.jpg', 0)
         # reduce the size of the image to fit plotter proportions
-        img = self.compress_image(img)
+        img = self.compress_image(img, 3)
         # apply Floyd-Steinberg dithering algorithm
         img = self.apply_dithering(img)
         # calculate coordinates

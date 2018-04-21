@@ -10,6 +10,8 @@ Description => This class is going to control the proccessing of images for
 Author => Matthew Howard (mah60).
 Version =>   0.1 - 20/04/2018 -  create the basic class for the edges
                         algorithm. This code is yet to be complete.
+             0.2 - 21/04/2018 - removed ui from __init_- method as not
+                        used
 """
 from __future__ import division
 from image_proccesor import ImageProccesor
@@ -35,20 +37,18 @@ class EdgesStyle(ImageProccesor):
     return => None
     """
 
-    def __init__(self, ui):
+    def __init__(self):
         """
         Summary => will initialize the image proccesor.
 
         Description => will initialize the images proccesor, to be used later
                     on.
 
-        args => ui -> this is the qt window. The Gui_view
+        args => None
 
         return => None
         """
-        super(EdgesStyle, self).__init__(ui)
-
-        self.ui = ui
+        super(EdgesStyle, self).__init__()
 
     def run(self):
         """

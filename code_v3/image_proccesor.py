@@ -34,6 +34,8 @@ Version =>   0.1 - 12/03/2018 - set up basic set up for the class
 
                         created run() method that will tell the user that
                         the proccessor is incorrect.
+             0.4.2 - 21/04/2018 - removed ui from __init_- method as not
+                        used
 """
 from xy_coordinate import XYCoordinate
 import numpy as np
@@ -54,18 +56,17 @@ class ImageProccesor(object):
     return => None
     """
 
-    def __init__(self, ui):
+    def __init__(self):
         """
         Summary => will initialize the image proccesor.
 
         Description => will initialize the images proccesor, to be used later
                     on.
 
-        args => ui -> this is the qt window. The Gui_view
+        args => None
 
         return => None
         """
-        self.ui = ui
 
     def run(self):
         """
@@ -152,7 +153,7 @@ class ImageProccesor(object):
         # replace old coordinates array with new one without empty slots
         self.coordinates = new_coord
 
-    def compress_image(self, img):
+    def compress_image(self, img, scale):
         """
         Summary => compress the size of the image given.
 
@@ -170,8 +171,8 @@ class ImageProccesor(object):
         # print(img.shape)
         # calculate the height and width of new compress_image
         # the size will be 1/3 of its original size.
-        height = int(round(img.shape[0]/3))
-        width = int(round(img.shape[1]/3))
+        height = int(round(img.shape[0]/scale))
+        width = int(round(img.shape[1]/scale))
         # print(str(height) + "," + str(width))
         # use opencv to resize the image given.
         resized_image = cv2.resize(img, (width, height))

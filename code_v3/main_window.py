@@ -32,7 +32,12 @@ Version => 0.1 - 12/03/2018 - has the basic set up for the gui. Created Actions
                         Updated the gui, so that the check boxes now work.
                         As well there is now a method restart_application
                         that is attached to the menubar so it can be
-                        reset.
+                        restart.
+           0.4.2 - 21/04/2018 - removed ui as a args for the proccessors
+                        as it is not used.
+
+                        modified restart_application, so that you cannot
+                        restart on first page avoiding error in camera.
 """
 import time
 import sys
@@ -56,7 +61,9 @@ class MainWindow(QtGui.QMainWindow):
     """
     Summary => maintain the GUI used to control the robotic artist.
 
-    Description =>
+    Description => This class will be used to generate and control the GUI used
+    for the system. You will be able to control the camera and see the feed
+    comming from it.
 
     args => None
 
@@ -90,6 +97,14 @@ class MainWindow(QtGui.QMainWindow):
         restart_application.setStatusTip('Leave The App')
         restart_application.triggered.connect(self.restart_application)
         self.ui.menuFile.addAction(restart_application)
+
+        # set unworking menuBar items, to display error message
+        self.ui.actionLogin.triggered.connect(
+                                                        self.trigger_error)
+        self.ui.actionToggle_Admin_View.triggered.connect(
+                                                        self.trigger_error)
+        self.ui.actionTutorial.triggered.connect(
+                                                        self.trigger_error)
 
         # --------------------------------------------------------
         # set the stackedWidget view to be the first page
@@ -139,6 +154,16 @@ class MainWindow(QtGui.QMainWindow):
 
         pixmap = QtGui.QPixmap("Images/blank_image.jpg")
         self.ui.image_style5.setPixmap(pixmap)
+
+        # import text for description
+        # got technique from
+        # https://stackoverflow.com/questions/8369219/
+        # how-do-i-read-a-text-file-into-a-string-variable-in-python
+        text = ""
+        with open('description.txt', 'r') as myfile:
+            text = myfile.read()
+        # set discription text
+        self.ui.description_text.setText(text)
 # ------------------------------------------------------------
 # methods
 # ------------------------------------------------------------
@@ -249,8 +274,8 @@ class MainWindow(QtGui.QMainWindow):
         """
         print("Image processing")
         self.proccessors = [
-                            Dithering(self.ui),
-                            EdgesStyle(self.ui)
+                            Dithering(),
+                            EdgesStyle()
                             ]
         no_check = True
         checked = 0
@@ -304,10 +329,9 @@ class MainWindow(QtGui.QMainWindow):
         """
         print("taken picture!!!!!")
         if self.ui.check_process.isChecked():
-            # stop the video feed from the camera, until enter the page again.
-            self.camera.stop_video_capture()
             # sleep to let the program to update, before changing screen
             time.sleep(0.1)
+            self.camera.stop_video_capture()
             # changed to the acceptance page, after picture has been taken
             self.display_stack(1)
         else:
@@ -457,22 +481,49 @@ class MainWindow(QtGui.QMainWindow):
 
         return => None
         """
-        # creating exit pop-up message
-        choice = QMessageBox.question(self, 'Restarting Application',
-                                            "Restart Application?",
-                                            QMessageBox.Yes |
-                                            QMessageBox.No)
-        # do actions depending on response
-        if choice == QMessageBox.Yes:
-            # close the camera feed, if it is still running
-            self.camera.stop_video_capture()
-            # reset each of the images to blank, when closed
-            cv2.imwrite("Images/takenPicture.jpg", cv2.imread(
-                                                        "Images/blank.jpg"))
-            cv2.imwrite("Images/proccessedImage.jpg", cv2.imread(
-                                                        "Images/blank.jpg"))
-            print("Restarting Application")
-            # change bk to front page
-            self.display_stack(0)
+        if self.ui.page_layer.currentIndex() == 0:
+            error = QMessageBox()
+            error.setIcon(QMessageBox.Information)
+            error.setText("Cannot restart this page")
+            error.setWindowTitle("Error: cannot restart")
+            error.setStandardButtons(QMessageBox.Ok)
+            error.exec_()
         else:
-            pass
+            # creating exit pop-up message
+            choice = QMessageBox.question(self, 'Restarting Application',
+                                                "Restart Application?",
+                                                QMessageBox.Yes |
+                                                QMessageBox.No)
+            # do actions depending on response
+            if choice == QMessageBox.Yes:
+                # close the camera feed, if it is still running
+                self.camera.stop_video_capture()
+                # reset each of the images to blank, when closed
+                cv2.imwrite("Images/takenPicture.jpg", cv2.imread(
+                                                            "Images/blank.jpg"))
+                cv2.imwrite("Images/proccessedImage.jpg", cv2.imread(
+                                                            "Images/blank.jpg"))
+                print("Restarting Application")
+                # change bk to front page
+                self.display_stack(0)
+            else:
+                pass
+
+    def trigger_error(self):
+        """
+        Summary => will send out of order error.
+
+        Description => will send out of order error message.
+                This message is to say that this part of the program is
+                either broken or not complete.
+
+        args => None
+
+        return => None
+        """
+        error = QMessageBox()
+        error.setIcon(QMessageBox.Information)
+        error.setText("Error: this function is currently out of use")
+        error.setWindowTitle("Error: Out of order")
+        error.setStandardButtons(QMessageBox.Ok)
+        error.exec_()

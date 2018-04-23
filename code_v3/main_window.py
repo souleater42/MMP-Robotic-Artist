@@ -337,7 +337,7 @@ class MainWindow(QtGui.QMainWindow):
         else:
             error = QMessageBox()
             error.setIcon(QMessageBox.Information)
-            error.setText("Please confirm that we can process your pitcture")
+            error.setText("Please confirm that we can process your picture")
             error.setWindowTitle("Confirmation")
             error.setStandardButtons(QMessageBox.Ok)
             error.exec_()
@@ -372,19 +372,19 @@ class MainWindow(QtGui.QMainWindow):
         # plot coords for dithering style
         self.plotters = [
                         DitheringPlotter(
-                                        self.proccessors[1].get_coordinates(),
+                                        self.proccessors[0].get_coordinates(),
                                         1),
                         EdgeStylePlotter(
-                                        self.proccessors[2].get_coordinates()
+                                        self.proccessors[1].get_coordinates()
                                         , 1)
                         ]
         # call run, when ready to throw through the process.
-        for plotter, i in enumerate(self.plotters):
-            # need to check if thread is running, so doesn't start more
-            # than one thread from pressing button muiltiple times.
-            if not plotter.is_alive():
-                # check if specified style is ticked
-                if self.style_check_boxes[i].isChecked():
+        for i, plotter in enumerate(self.plotters):
+            # check if specified style is ticked
+            if self.style_check_boxes[i].isChecked():
+                # need to check if thread is running, so doesn't start more
+                # than one thread from pressing button muiltiple times.
+                if not plotter.is_alive():
                     plotter.start()
 
     def reject_style(self):
@@ -482,6 +482,7 @@ class MainWindow(QtGui.QMainWindow):
         return => None
         """
         if self.ui.page_layer.currentIndex() == 0:
+            time.sleep(1)
             error = QMessageBox()
             error.setIcon(QMessageBox.Information)
             error.setText("Cannot restart this page")

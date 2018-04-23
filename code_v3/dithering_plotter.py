@@ -27,6 +27,7 @@ from xy_coordinate import XYCoordinate
 from serial_control import SerialControl as serial
 from plotter_controller import PlotterController
 import time
+import threading
 
 
 class DitheringPlotter(PlotterController):

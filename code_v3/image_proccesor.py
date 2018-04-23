@@ -67,6 +67,8 @@ class ImageProccesor(object):
 
         return => None
         """
+        # set coordinates
+        self.coordinates = np.zeros(1, dtype=XYCoordinate)
 
     def run(self):
         """

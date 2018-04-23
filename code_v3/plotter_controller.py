@@ -37,6 +37,7 @@ Version => 0.1 - 15/03/2018 - This is the basic set up to this class.
 """
 from xy_coordinate import XYCoordinate
 from serial_control import SerialControl as serial
+from threading import current_thread
 import threading
 import time
 import numpy as np
@@ -59,6 +60,8 @@ class PlotterController(threading.Thread):
 
     return => None
     """
+    
+    
 
     def __init__(self, coordinates, scale):
         """
@@ -75,6 +78,9 @@ class PlotterController(threading.Thread):
 
         return => None
         """
+        self.parent = current_thread()
+        threading.Thread.__init__(self)
+        
         self.ser = serial("/dev/ttyUSB0")
         self.coordinates = coordinates
         self.scale = scale

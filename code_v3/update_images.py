@@ -62,5 +62,5 @@ class UpdateImages(QtCore.QThread):
 
         return => None
         """
-        images = ["Images/takenPicture.jpg", "Images/proccessedImage.jpg"]
+        images = ["Images/takenPicture.jpg", "Images/processedImage.jpg"]
         self.emit(QtCore.SIGNAL("update_images(PyQt_PyObject)"), images)

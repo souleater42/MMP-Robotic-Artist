@@ -1,7 +1,7 @@
 """
 Summary => will be used to control the camera.
 
-Description => will control the camera, for the input and output proccess's.
+Description => will control the camera, for the input and output process's.
                 This will include being able to create and stop a thread that
                 is produced during the process.
 
@@ -23,7 +23,7 @@ class CameraController(object):
     Summary => will control the camera for the robotic artist.
 
     Description => will control the camera, for the input and output
-                    proccess's. This will include being able to create
+                    process's. This will include being able to create
                     and stop a thread that is produced during the process.
 
     args => None

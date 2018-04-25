@@ -14,12 +14,12 @@ Version =>   0.1 - 20/04/2018 -  create the basic class for the edges
                         used
 """
 from __future__ import division
-from image_proccesor import ImageProccesor
+from image_processor import ImageProcessor
 import numpy as np
 import cv2
 
 
-class EdgesStyle(ImageProccesor):
+class EdgesStyle(ImageProcessor):
     """
     Summary => will apply the dithering algorithm to the image given.
 
@@ -29,7 +29,7 @@ class EdgesStyle(ImageProccesor):
                 be a list of x and y coordinates for the plotter to print out
                 later on.
 
-                This class inherits ImageProccesor and will take on the
+                This class inherits Imageprocessor and will take on the
                 individual classes for it.
 
     args => None
@@ -39,9 +39,9 @@ class EdgesStyle(ImageProccesor):
 
     def __init__(self):
         """
-        Summary => will initialize the image proccesor.
+        Summary => will initialize the image processor.
 
-        Description => will initialize the images proccesor, to be used later
+        Description => will initialize the images processor, to be used later
                     on.
 
         args => None

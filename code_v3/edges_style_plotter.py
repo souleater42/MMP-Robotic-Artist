@@ -45,11 +45,6 @@ class EdgeStylePlotter(PlotterController):
         return => None
         """
         super(EdgeStylePlotter, self).__init__(coordinates, scale)
-        # create connection with serial to the plotter.
-        self.ser = serial("/dev/ttyUSB0")
-        # assign given values to object.
-        self.coordinates = coordinates
-        self.scale = scale
 
     def run(self):
         """

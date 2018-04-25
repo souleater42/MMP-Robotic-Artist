@@ -60,8 +60,6 @@ class PlotterController(threading.Thread):
 
     return => None
     """
-    
-    
 
     def __init__(self, coordinates, scale):
         """
@@ -80,7 +78,7 @@ class PlotterController(threading.Thread):
         """
         self.parent = current_thread()
         threading.Thread.__init__(self)
-        
+
         self.ser = serial("/dev/ttyUSB0")
         self.coordinates = coordinates
         self.scale = scale

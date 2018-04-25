@@ -25,15 +25,15 @@ Version => 0.1 - 12/03/2018 - has the basic set up for the gui. Created Actions
                         plotter_controller to the dithering and
                         dithering_plotter as they are children of those
                         classes and will print out there specific style.
-           0.4.1 - 21/04/2018 - changed proccess_image and start_plot.
-                        to loop through every plotter and proccessor that
+           0.4.1 - 21/04/2018 - changed process_image and start_plot.
+                        to loop through every plotter and processor that
                         have been added to their arrays.
 
                         Updated the gui, so that the check boxes now work.
                         As well there is now a method restart_application
                         that is attached to the menubar so it can be
                         restart.
-           0.4.2 - 21/04/2018 - removed ui as a args for the proccessors
+           0.4.2 - 21/04/2018 - removed ui as a args for the processors
                         as it is not used.
 
                         modified restart_application, so that you cannot
@@ -119,7 +119,7 @@ class MainWindow(QtGui.QMainWindow):
         # self.ui.yes_no_button.clicked.connect(self.accept_picture)
         btn = self.ui.yes_no_button2.button(self.ui.yes_no_button.Yes)
         btn.clicked.connect(self.start_plot)
-        self.ui.btn_continue1.clicked.connect(self.proccess_image)
+        self.ui.btn_continue1.clicked.connect(self.process_image)
         btn = self.ui.yes_no_button2.button(self.ui.yes_no_button.No)
         btn.clicked.connect(self.reject_style)
         # self.ui.video_capture.show()
@@ -260,9 +260,9 @@ class MainWindow(QtGui.QMainWindow):
 # Actions
 # ------------------------------------------------------------
 
-    def proccess_image(self):
+    def process_image(self):
         """
-        Summary => starts the process for proccessing.
+        Summary => starts the process for processing.
 
         Description => start the process for processing the image that
                 was captured ealier on in the gui. This method will be
@@ -273,18 +273,18 @@ class MainWindow(QtGui.QMainWindow):
         return => None
         """
         print("Image processing")
-        self.proccessors = [
+        self.processors = [
                             Dithering(),
                             EdgesStyle()
                             ]
         no_check = True
         checked = 0
-        # loop through every proccessor
-        for i, proccessor in enumerate(self.proccessors):
+        # loop through every processor
+        for i, processor in enumerate(self.processors):
             # check if check_box style has been ticked
             if self.style_check_boxes[i].isChecked():
                 # run the processor
-                proccessor.run()
+                processor.run()
                 no_check = False
                 checked = checked + 1
         # check if no check_boxs have been ticked
@@ -372,10 +372,10 @@ class MainWindow(QtGui.QMainWindow):
         # plot coords for dithering style
         self.plotters = [
                         DitheringPlotter(
-                                        self.proccessors[0].get_coordinates(),
+                                        self.processors[0].get_coordinates(),
                                         1),
                         EdgeStylePlotter(
-                                        self.proccessors[1].get_coordinates()
+                                        self.processors[1].get_coordinates()
                                         , 1)
                         ]
         # call run, when ready to throw through the process.
@@ -462,7 +462,7 @@ class MainWindow(QtGui.QMainWindow):
             # reset each of the images to blank, when closed
             cv2.imwrite("Images/takenPicture.jpg", cv2.imread(
                                                         "Images/blank.jpg"))
-            cv2.imwrite("Images/proccessedImage.jpg", cv2.imread(
+            cv2.imwrite("Images/processedImage.jpg", cv2.imread(
                                                         "Images/blank.jpg"))
             print("Leaving Application")
             sys.exit()
@@ -502,7 +502,7 @@ class MainWindow(QtGui.QMainWindow):
                 # reset each of the images to blank, when closed
                 cv2.imwrite("Images/takenPicture.jpg", cv2.imread(
                                                             "Images/blank.jpg"))
-                cv2.imwrite("Images/proccessedImage.jpg", cv2.imread(
+                cv2.imwrite("Images/processedImage.jpg", cv2.imread(
                                                             "Images/blank.jpg"))
                 print("Restarting Application")
                 # change bk to front page

@@ -1,7 +1,9 @@
 """
 Summary => The controller class for initializing the Robotic aritst.
 
-Description => TODO: add a description.
+Description => Will initilize the sequence of events for robotic artist.
+    This involves initializing the GUI and this will then initilize all
+    the other requirements in the product.
 
 Author => Matthew Howard (mah60).
 Version =>
@@ -24,7 +26,9 @@ def main():
     """
     Summary => will initilize the robotic artist.
 
-    Description =>
+    Description => Will initilize the sequence of events for robotic artist.
+        This involves initializing the GUI and this will then initilize all
+        the other requirements in the product.
 
     args => None
 

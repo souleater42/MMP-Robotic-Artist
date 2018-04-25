@@ -90,7 +90,7 @@ class VideoCapture(QtCore.QThread):
             # ret => boolean - this is true if the frame has been read
             # correctly
             # will slow down the camera, so it can keep up to
-            # the raspberry pi proccessor
+            # the raspberry pi processor
             # time.sleep(0.1)
             ret, frame = self.cap.read()
             if ret is True:
@@ -105,9 +105,9 @@ class VideoCapture(QtCore.QThread):
 
         time.sleep(0.1)
         cv2.imwrite("Images/takenPicture.jpg", captured_frame)
-        #cv2.imwrite("Images/vidCap.jpg", cv2.imread("Images/blank.jpg"))
-        self.cap.release()
-        cv2.destroyAllWindows()
+        # cv2.imwrite("Images/vidCap.jpg", cv2.imread("Images/blank.jpg"))
+        # self.cap.release()
+        # cv2.destroyAllWindows()
 
         # update images in gui
         self.update_thread.start()

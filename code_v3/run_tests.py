@@ -10,7 +10,7 @@ Version => 0.1 - 18/03/2018 - created basic version of test suite.
 import unittest
 
 from test_plotter_controller import TestPlotterController as TPlot
-from test_image_proccessor import TestImageProccesor as IPro
+from test_image_processor import TestImageProccesor as IPro
 
 
 def run_tests():

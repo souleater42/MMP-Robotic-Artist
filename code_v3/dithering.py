@@ -1,7 +1,7 @@
 """
 Summary => will apply the dithering algorithm to the image given.
 
-Description => This class is going to control the proccessing of images for
+Description => This class is going to control the processing of images for
             the dithering algorithm. It will take a the 'takenPicture.jpg'
             from the Image folder and then stlye it. The output will
             be a list of x and y coordinates for the plotter to print out
@@ -19,7 +19,7 @@ Version =>   0.1 - 17/04/2018 - created the basic set up for the dithering
 
                     Removed add_to_pixels method.
             0.3 - 20/04/2018 - working code. Adding comments to the code.
-                    Moved check_pixel method to image_proccesor as the
+                    Moved check_pixel method to image_processor as the
                     method can be used over all styles written.
 
                     Removed un-used code. Look at older versions for
@@ -28,38 +28,38 @@ Version =>   0.1 - 17/04/2018 - created the basic set up for the dithering
                         used
 """
 from __future__ import division
-from image_proccesor import ImageProccesor
+from image_processor import ImageProcessor
 import cv2
 
 
-class Dithering(ImageProccesor):
+class Dithering(ImageProcessor):
     """
     Summary => will apply the dithering algorithm to the image given.
 
-    Description => This class is going to control the proccessing of images for
+    Description => This class is going to control the processing of images for
                 the dithering algorithm. It will take a the 'takenPicture.jpg'
                 from the Image folder and then stlye it. The output will
                 be a list of x and y coordinates for the plotter to print out
                 later on.
 
-                This class inherits ImageProccesor and will take on the
+                This class inherits Imageprocessor and will take on the
                 individual classes for it.
 
     args => None
 
-    None => None
+    return => None
     """
 
     def __init__(self):
         """
-        Summary => will initialize the image proccesor.
+        Summary => will initialize the image processor.
 
-        Description => will initialize the images proccesor, to be used later
+        Description => will initialize the images processor, to be used later
                     on.
 
         args => None
 
-        None => None
+        return => None
         """
         super(Dithering, self).__init__()
 
@@ -72,7 +72,7 @@ class Dithering(ImageProccesor):
 
         args => None
 
-        None => None
+        return => None
         """
         # get the image to be processed, read in gray
         img = cv2.imread('Images/takenPicture.jpg', 0)
@@ -83,7 +83,7 @@ class Dithering(ImageProccesor):
         # calculate coordinates
         self.coordinates = self.calculate_coordinates(img)
         # save the processed image
-        cv2.imwrite('Images/proccessedImage.jpg', img)
+        cv2.imwrite('Images/processedImage.jpg', img)
         # cv2.imwrite('Images/dithering_example.jpg', img)
 
     def apply_dithering(self, img):
@@ -97,7 +97,7 @@ class Dithering(ImageProccesor):
                 dithering algorithm.
 
         return => img -> 2d numpy array - this image will be image after
-                it has been proccessed.
+                it has been processed.
         """
         # find even point to split colour values at.
         split = 255/2
@@ -123,7 +123,7 @@ class Dithering(ImageProccesor):
         Summary => will calculate Floyd-Steinberg error defusion method.
 
         Description => will calculate Floyd-Steinberg error defusion method
-                through the dithering algorithm. The proccess will be done by
+                through the dithering algorithm. The process will be done by
                 applying the following kernal to the pixels around it.
 
                 0               Current Pixel   modifier*7/16

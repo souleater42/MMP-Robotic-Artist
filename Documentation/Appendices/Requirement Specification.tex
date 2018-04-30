@@ -27,7 +27,7 @@
 
 \fancyfoot{}
 
-\fancyhead[L]{Robotic Artist:Walter / 0.1 (Final)}
+\fancyhead[L]{Robotic Artist:Walter / 0.3 (WIP)}
 
 \fancyfoot[L]{Aberystwyth University / Computer Science}
 
@@ -67,9 +67,9 @@
           User ID: Mah60 \\
           Supervisor Name: Helen Miles \\
           Supervisor ID: Hem23\\
-          Last Modified: 12/02/2018 \\
-          Version: 1.0\\
-          Status: Final} \\
+          Last Modified: 25/04/2018 \\
+          Version: 0.3\\
+          Status: Work In Progress(WIP)} \\
 
         \end{center}        
 
@@ -77,41 +77,47 @@
   
     \clearpage
 
- 	\tableofcontents
- 	
- 	\clearpage
+     \tableofcontents
+     
+     \clearpage
 
     \section{Introduction}
 
-This document will talk about the requirements that are set for the final product of the Robotic Artist is going to have. The requirements will be expanded on to clearly explain what is wanted from this project. Each of the requirements will also be assigned a priority and explain the resoning behind it.
+This document will discuss the requirements that have been set for the final product of the Robotic Artist project. The requirements will be expanded on to clearly explain what is wanted from this project. Each of the requirements will also be assigned a priority and an explaination of the reasoning behind it.
 
-	\section{Requirements}
-	
-The following list is the requirements that are set for this project. If these tasks are completed, then the Robotic Artist should work as wanted.
+    \section{Requirements}
+    
+The following list is of the requirements that are defined for the project. If these tasks are completed, then the Robotic Artist should work as required.
 
 \begin{enumerate}
   \item Connect and control Roland 990 pen plotter
   \item Control a camera
   \item Create a Graphical Unit Interface(GUI)
-  \item Program Raspberry Pi to become a Router between devices
-  \item Generate artistic styles
+  \item Generate artistic styles algorithms
   \item Plot artistic drawings
-  \item Make robot easy to use
-  \item Admins has control on run time
 \end{enumerate}
 
 The following section will expand on each requirement and talk about the priority of having these requirements working.\\ \newline
-
 \textbf{Connect and control Roland 990 pen plotter} \\
+This requires the program to talk to the Roland 990 pen plotter and be able to communicate through the serial port. This will be done using HPGL, as this is the language the plotter communicates with.\\ \newline
+The priority on getting communication between the plotter and raspberry pi using serial communication is very high. This is because the project cannot be completed without being able to do this.\\ \newline
 \textbf{Control a camera} \\
-\textbf{Create a Graphical Unit Interface(GUI)}\\
-\textbf{Program Raspberry Pi to become a Router between devices}\\
-\textbf{Generate artistic styles}\\
-\textbf{Plot artistic drawings}\\
-\textbf{Make robot easy to use}\\
-\textbf{Admins has control on run time}\\
-
-
+This requirement is about getting a video feed from the camera in order to view what the camera is looking at. Additionally, the camera is needed to be able to take pictures to be analyzed later in the project.
+\\ \newline
+This requirement is quite useful but it is more useful to get the image processing and the plotter working before doing this part of the project.
+\\ \newline
+\textbf{Create a Graphical Unit Interface(GUI)}\\ \newline
+This requirement is all about creating a GUI to control and run the whole program. This GUI needs to be user-friendly and easy to use. The GUI must also go through the following structure; demonstrate a video feed, capture a picture from the video feed, pick a style with which to process the captured image and then to click a button to print the desired style. \\ \newline
+This part of the project is of high priority to make a basic design. This is because the GUI provides a skeleton environment in which to run and control the program that is more user-friendly than trying to run the program through the terminal.
+\\ \newline
+\clearpage
+\textbf{Generate artistic styles algorithms}\\ \newline
+This requirement is to be able to create an artistic style from processing an image in a specific way. The requirement is to create one or more styles which can be picked from the GUI. This can be done through various OpenCV formatting or through algorithms that are applied to the image itself.\\ \newline
+This is of very high priority as generating styles is the core part of this project and the project cannot be seen as complete without this working. The development of this requirement must consider future development of new styles and whether the style that is generated is visually appealing and also the time that will be required to plot the style.
+\\ \newline
+\textbf{Plot artistic drawings}\\ \newline
+This requirement is to send commands to the plotter through serial communication. This will need to be done in a specific way to print out the specific style that is given. As well, the printing style may need to be altered to improve efficiency and reduce the required time to be printed. Also, if possible create a plotting process that will look more realistic or pleasing to the eye.\\ \newline
+The priority of this requirement is lower than getting the styling working and the GUI. The reason for this is because in the worse case scenario the plotting algorithm can be basic and only needs to print out the list of coordinates given to the plotter controller.\\ \newline 
 
     \section{Versions}
 
@@ -124,7 +130,10 @@ The following section will expand on each requirement and talk about the priorit
 
 \textbf{Version} & \textbf{Description} & \textbf{Date Modified} \\\hline
 
-0.1 & blank. & time, date \\ \hline
+0.1 & Created basic version of the text with the layout of what the structure of this document is going to be like. & 21/04/2018 \\ \hline
+0.2 & Filled in the structure of the text with an explanation and priority for each key requirement. & 23/04/2018 \\ \hline
+0.3 & corrected spelling and grammar mistakes. Also, made adaptations; such as removed Raspberry pi controller requirement as was repeating GUI section. & 25/04/2018\\ \hline
+0.3.1 & made minor corrections to grammar. & 27/04/18 \\ \hline
 
 
 \end{tabular}

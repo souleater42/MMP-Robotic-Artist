@@ -1,0 +1,35 @@
+\relax 
+\citation{Requirement_specifications}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{2}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Version Control}{2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Demonstrates the Version control that is being used in the video\_capture.py Module. This includes the version number, description and date of change.}}{2}}
+\newlabel{fig:Version_Control}{{1}{2}}
+\citation{qt_designer}
+\@writefile{toc}{\contentsline {section}{\numberline {3}UML Diagrams}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Class Diagram}{3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Displays the UML class diagram. This is the structure of all the classes in the products code.}}{3}}
+\newlabel{fig:class_diagram}{{2}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Sequence Diagrams}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Displays the sequence that is taken to display the video feed at the start of the application. The sequence diagram shows that the MainWindow will go into a continuous loop of talking to the Camera and VideoCapture class to get frames to display on the GUI as the video capture. When the Capture Image button is pressed by the user, then the GUI will move onto the next page asking if the captured image is suitable for what the user wants.}}{4}}
+\newlabel{fig:SD_video_feed}{{3}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Displays the sequence that is taken to process an Image. This is after the sequence of events in Figure 3\hbox {} and the Image has been accepted to be processed. The user will be taken to page 3 of the GUI. This is the style selection page. After one style has been selected the image will be processed for the specified style. In this case, it is the Dithering style. So the program will run the method run() in the image processor Dithing.py. After this the finalized style will be displayed on page 4. Then there are two sequences of events either the user can accept the style and start the plot or reject the style and go back to page 3.}}{5}}
+\newlabel{fig:SD_image_processing}{{4}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Displays the sequence that is taken to plot the style that was processed through the given style. This involves when the style has been accepted on page 4, as continued from Figure 4\hbox {}. Then the coordinates are gathered from that style in the MainWindow class, then the thread for plotting that specified style begins. This involves sending multiple HPGL commands through serial communication to the plotter. After this task is plotted and all coordinates that were made are complete then the application is restarted from the beginning or the application is closed.}}{5}}
+\newlabel{fig:SD_plotting}{{5}{5}}
+\citation{pyqt}
+\citation{qt_designer}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Graphical Unit Interface(GUI) Design}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces This is an example of how the QT designer software looked when developing the GUI for the project}}{6}}
+\newlabel{fig:Qt_designer}{{6}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Page 1: Video capture. This page was designed to contain the video capture from the camera. The design of the page is to have a label that a QImage can be added to. During runtime, the image will continuously be updated through a QThread. The other parts of the page are two checkboxes and a button at the bottom of the page, which stops the video capture and take the frame it was on as a picture. This routine can be seen in Figure 3\hbox {}.}}{7}}
+\newlabel{fig:page_1}{{7}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Page 2: Picture Acceptence. This page has a label that will contain the captured frame. Then there are a set of buttons that ask yes or no to whether the picture taken is correct.}}{7}}
+\newlabel{fig:page_2}{{8}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Page 3: Style selection. This page is all about selecting the individual style you want. There is a grid layout with labels inside them that display either text or images. These make a grid that displays the styles image and the name of each of the styles. In this section, you are only allowed to select one style. Then once you have selected that style and pressed the button the program will process the image from the style that you have selected. At the moment the GUI has a limit of 5 styles to pick from when they are all made. However, modification to the code will allow more in line with additional styles being developed.}}{8}}
+\newlabel{fig:page_3}{{9}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Page 4: Style confirmation. This page has a label that contains the stylized image and then a button at the end of the page that allows the user to accept or reject the style.}}{8}}
+\newlabel{fig:page_4}{{10}{8}}
+\bibcite{Requirement_specifications}{1}
+\bibcite{qt_designer}{2}
+\bibcite{pyqt}{3}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Versions}{9}}

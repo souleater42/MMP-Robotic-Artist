@@ -1,0 +1,198 @@
+\documentclass{article}
+
+\usepackage{lscape}
+
+\usepackage[margin=1in, left=1.5in, includefoot]{geometry} 
+
+
+%graphic stuff
+
+\usepackage{graphicx} % allows images
+
+\usepackage{float} %helps with posisioning
+
+\usepackage{longtable}
+
+
+%header and footer stuff
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+
+\fancyhead{}
+
+\fancyfoot{}
+
+\fancyhead[L]{Robotic Artist:Walter / 0.3 (WIP)}
+
+\fancyfoot[L]{Aberystwyth University / Computer Science}
+
+\fancyfoot[R]{page: \thepage}
+
+\renewcommand{\headrulewidth}{0pt}
+
+\renewcommand{\footrulewidth}{0pt}
+\usepackage{amsmath}
+\usepackage{gensymb}
+\usepackage{parskip}
+\usepackage[none]{hyphenat}
+%begins document
+
+ \begin{document}
+
+
+
+    % begin title screen
+
+    \begin{titlepage}
+
+        \begin{center}
+
+        \line(1,0){340}\\ 
+
+
+        \large{\bfseries Robotic Artist:Walter} \\
+
+        \large {\bfseries G400 Computer Science, CS39440 }\\
+        
+        \large {\bfseries Test Record}\\
+
+
+         \line(1,0){250}\\
+
+         \textsf {Author: Matthew Howard \\
+          Candidate Number: 150035512\\
+          User ID: Mah60 \\
+          Supervisor Name: Helen Miles \\
+          Supervisor ID: Hem23\\
+          Last Modified: 26/04/2018 \\
+          Version: 0.1\\
+          Status: Work In Progress(WIP)} \\
+
+        \end{center}        
+
+    \end{titlepage}
+  
+    \clearpage
+
+     \tableofcontents
+     
+     \clearpage
+     
+     
+
+    \section{Introduction}
+This document is here to keep record of the tests that were performed on the Artistic Robot product. The tests will following the testing specifications within the Test Plan\cite{Test_Plan}.\\ \newline
+\begin{landscape}
+    \section{Test 1; 28/04/18}
+ The following tests were done on mah60 laptop and not the Raspberry Pi on the 28/04/18. \\ \newline
+\newcounter{id}
+\stepcounter{id} % set counter to one
+\begin{center}
+\subsection{GUI tests}
+\begin{longtable}{| l | p{3cm} | p{4cm}| p{4cm}| p{4cm} | l | l |}
+
+\hline
+
+\textbf{ID} & \textbf{Test} & \textbf{Test Instructions} & \textbf{Expected Outcome} & \textbf{Actual Outcome} & \textbf{Date} & \textbf{Tester ID}\\\hline
+
+\arabic{id} \stepcounter{id} & Open Application & Open the application. Do this 5 times. & The application will open. & The application opens correctly. & 28/04/18 & mah60 \\ \hline
+
+\arabic{id} \stepcounter{id} &  Exit application function & Go to file menu and click 'Exit Application'. Try 3 times. Then try again with the command 'Ctrl+Q'. & The function will open a pop-up, asking if you are sure. Then when yes is pressed the application will close and if no is pressed you will be returned to the page you were on. & The application close's correctly using the 'Exit Application' function. & 28/04/18 & mah60   \\ \hline
+
+\arabic{id} \stepcounter{id} & Restart application & Test the function restart application 2 times on each page that is inside the file menu.& The application will be restart to the video capture page. If on the video capture page, a pop-up will tell you saying that you cannot restart on this page.& The restart function works on every page and pops up a error if on video capture page.& 28/04/18 & mah60   \\ \hline
+
+\arabic{id} \stepcounter{id} & Admin login function & go to Admin and then click 'login', do 2 times and then try to log in. & A pop-up window will appear that allows the user to log in.& N/A: does not work as function is not implemented.& 28/04/18 & mah60   \\ \hline
+
+\arabic{id} \stepcounter{id} & Toggle admin view function & Go to the Admin menu and click 'toggle admin view'. Do this 3 times & This should open a window that allows the admin to view the input and output of the program. What is occurring on the application at runtime? & N/A: does not work as function is not implemented.& 28/04/18 & mah60   \\ \hline
+
+\arabic{id} \stepcounter{id} & Tutorial function & Go to Help menu and click 'tutorial'. Do this 3 times. & The application will open a window that displays instructions on how to use the application given.&N/A: does not work as function is not implemented. & 28/04/18 & mah60   \\ \hline
+
+\arabic{id} \stepcounter{id} & Video Capture & Open the application 3 times and check if the video display is working correctly. & The video capture will be displayed with no error. & The video capture has worked every time the application has been opened.& 28/04/18 & mah60   \\ \hline
+
+\arabic{id} \stepcounter{id} & Checkbox - allow to use photo in the application & Click the 'Capture Picture' button. Do this 2 times. Then check the checkbox and see if you are allowed to proceed. Do this 2 times. & when unticked an error message will pop up. When checked user will go to the picture acceptance page. & The checkbox works correctly and only lets users through when checked.& 28/04/18 & mah60   \\ \hline
+
+\arabic{id} \stepcounter{id} & Capture Picture button & Check checkbox 1 and Click the 'Capture Picture' button 4 times. & The user will be taken to the picture acceptance page. The video capture thread has stopped and the picture that was taken is displayed on the picture acceptance page.& This button takes the current frame from the video capture and saves it as the captured image. This image is displayed correctly. & 28/04/18 & mah60   \\ \hline
+
+\arabic{id} \stepcounter{id} & Click No; picture acceptance page & Click the no button on the picture acceptance page. Do this 2 times. & When 'no' is pressed a pop-up will turn up. Which ask's if the user definitely wants to reject the taken picture. & The 'No' button does ask for confirmation of rejection and then takes the user to the Video Capture page. & 28/04/18 & mah60   \\ \hline
+
+\arabic{id} \stepcounter{id} & Click Yes; picture acceptance page & Click the yes button on the picture acceptance page. Do this 2 times. & This should take you to the style selection page. & Pressing 'Yes' does take you to the style confirmation page.& 28/04/18 & mah60   \\ \hline
+
+\arabic{id} \stepcounter{id} & Select no styles & Click the continue button without selecting any styles.Do this 2 times. & A error message should pop-up, saying no styles have been selected. & When no styles selected. An error message appears telling them no styles have been selected. & 28/04/18 & mah60   \\ \hline
+
+\arabic{id} \stepcounter{id} & Select Multiple styles & Click the continue button with selecting multiple styles.Do this 2 times. & A error message should pop-up, saying too many styles have been selected & When multiple styles are selected. An error message appears telling the user that too many styles have been selected. & 28/04/18 & mah60   \\ \hline
+
+\arabic{id} \stepcounter{id} & Select a single style & Click the continue button with selecting only one stlye.Do this for 2 times. & You should be taken to the style acception page. With your picture processed in the style you selected. & When one style checked, the user is taken to the style confirmation page. After the captured image has been processed in the selected style. & 28/04/18 & mah60  \\ \hline
+
+\arabic{id} \stepcounter{id} & Click No; style confirmation page & Click the no button on the style confirmation page. Do this 2 times. & When 'no' is pressed a pop-up will turn up. Which asks if your sure that you done want this picture. & When selected No on the style confirmation page, the user if they are sure that they want to reject this style and is returned to the style selection page. & 28/04/18 & mah60   \\ \hline
+
+\arabic{id} \stepcounter{id} & Click Yes; style confirmation page & Click the yes button on the style confirmation page. Do this 2 times. & This should start the plot for the style that was confirmed to be correct. & When yes is pressed on the style confirmation page, an error occours that says that the application cannot connect to the serial to start the print. This is because the laptop being used is not connected to the pen plotter. & 28/04/18 & mah60  \\ \hline
+
+
+\end{longtable}
+\end{center}
+ \clearpage
+ \begin{center}
+\subsection{Image Processor tests}
+
+\begin{longtable}{| l | p{3cm} | p{4cm}| p{4cm}| p{4cm} | l | l |}
+
+\hline
+
+\textbf{ID} & \textbf{Test} & \textbf{Test Instructions} & \textbf{Expected Outcome} & \textbf{Actual Outcome} & \textbf{Date} & \textbf{Tester ID}\\\hline
+
+\arabic{id} \stepcounter{id} & Dithering style & select the dithering style and click the continue button. Do this 3 times. & The dithering style will be applied to the picture that was taken from the video capture. & The dithering style is applied to the captured image correctly. There is no error occouring. & 28/04/18 & mah60  \\ \hline
+
+\arabic{id} \stepcounter{id} & Edge style & select the Edge style and click the continue button. Do this 3 times. & The Edge style will be applied to the picture that was taken from the video capture. & The edge style works correctly, however, when using this style lighting and the background must be taken into account. & 28/04/18 & mah60   \\ \hline
+
+\end{longtable}
+\end{center}
+ \clearpage
+ \begin{center}
+\subsection{Plotter tests}
+
+\begin{longtable}{| l | p{3cm} | p{4cm}| p{4cm}| p{4cm} | l | l |}
+
+\hline
+
+\textbf{ID} & \textbf{Test} & \textbf{Test Instructions} & \textbf{Expected Outcome} & \textbf{Actual Outcome} & \textbf{Date} & \textbf{Tester ID}\\\hline
+
+\arabic{id} \stepcounter{id} & Dithering plotter & Once Image has been processed. Press 'yes' on the style confirmation page. Do 2 times. & The plotter should go through each coordinate and put the pen up and down at the respective locations. When the coordinate has a point the right of it, then pen moves to it instead of pulling the pen up and down again. & N/A as the laptop is not connected to the pen plotter.& 28/04/18 & mah60   \\ \hline
+
+\arabic{id} \stepcounter{id} & Edge plotter & Once Image has been processed. Press 'yes' on the style confirmation page. Do 2 times. & The plotter should go to a point and draw a line connecting all the points that are next to that point. & N/A as the laptop is not connected to the pen plotter. & 28/04/18 & mah60   \\ \hline
+
+\end{longtable}
+\end{center}
+
+ \clearpage
+\end{landscape}
+
+    \section{Versions}
+
+\begin{center}
+
+\begin{tabular}{| l | p{8cm} | p{3cm}|}
+
+\hline
+
+\textbf{Version} & \textbf{Description} & \textbf{Date Modified} \\\hline
+
+0.1 & Added first test, on testing the applications and the image processor on the users laptop. & 28/04/18 \\ \hline
+
+
+\end{tabular}
+
+    \begin{thebibliography}{9}
+
+    \bibitem{Test_Plan}
+
+    Matthew Howard (mah60);Test Plan; 25/04/2018 \\ 
+    
+    This document talks about the testing specifications that are used throughout this document.\\ 
+    
+     \end{thebibliography}
+    
+\end{center}
+
+ \end{document}

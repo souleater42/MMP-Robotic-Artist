@@ -106,8 +106,8 @@ class VideoCapture(QtCore.QThread):
         time.sleep(0.1)
         cv2.imwrite("Images/takenPicture.jpg", captured_frame)
         # cv2.imwrite("Images/vidCap.jpg", cv2.imread("Images/blank.jpg"))
-        # self.cap.release()
-        # cv2.destroyAllWindows()
+        self.cap.release()
+        cv2.destroyAllWindows()
 
         # update images in gui
         self.update_thread.start()

@@ -283,8 +283,6 @@ class MainWindow(QtGui.QMainWindow):
         for i, processor in enumerate(self.processors):
             # check if check_box style has been ticked
             if self.style_check_boxes[i].isChecked():
-                # run the processor
-                processor.run()
                 no_check = False
                 checked = checked + 1
         # check if no check_boxs have been ticked
@@ -297,6 +295,11 @@ class MainWindow(QtGui.QMainWindow):
             error.exec_()
         else:
             if checked == 1:
+                for i, processor in enumerate(self.processors):
+                    # check if check_box style has been ticked
+                    if self.style_check_boxes[i].isChecked():
+                        # run the processor
+                        processor.run()
                 # update images in gui
                 update = UpdateImages(self.ui)
                 # connect signal to update thread
@@ -501,9 +504,9 @@ class MainWindow(QtGui.QMainWindow):
                 self.camera.stop_video_capture()
                 # reset each of the images to blank, when closed
                 cv2.imwrite("Images/takenPicture.jpg", cv2.imread(
-                                                            "Images/blank.jpg"))
+                                                        "Images/blank.jpg"))
                 cv2.imwrite("Images/processedImage.jpg", cv2.imread(
-                                                            "Images/blank.jpg"))
+                                                        "Images/blank.jpg"))
                 print("Restarting Application")
                 # change bk to front page
                 self.display_stack(0)

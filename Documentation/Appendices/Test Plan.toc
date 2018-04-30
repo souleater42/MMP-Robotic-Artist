@@ -1,0 +1,7 @@
+\contentsline {section}{\numberline {1}Introduction}{2}
+\contentsline {section}{\numberline {2}Unit tests}{2}
+\contentsline {section}{\numberline {3}Testing specifications}{2}
+\contentsline {subsection}{\numberline {3.1}GUI tests}{3}
+\contentsline {subsection}{\numberline {3.2}Image Processor tests}{6}
+\contentsline {subsection}{\numberline {3.3}Plotter tests}{7}
+\contentsline {section}{\numberline {4}Versions}{8}

@@ -68,6 +68,8 @@ class EdgesStyle(ImageProcessor):
         """
         # get the image to be processed
         img = cv2.imread('Images/takenPicture.jpg', 0)
+        # resize img given
+        img = self.compress_image(img, 3)
         # img_edges = cv2.Canny(img, 80, 80)
         # blur the image so we can tell where the key boarders are
         blur = cv2.GaussianBlur(img, (5, 5), 0)
@@ -84,7 +86,7 @@ class EdgesStyle(ImageProcessor):
         # creates a threshold to create a black and white image
         ret, threshold = cv2.threshold(sobal, 25, 255, cv2.THRESH_BINARY_INV)
 
-        cv2.imwrite("Images/proccessedImage.jpg", threshold)
+        cv2.imwrite("Images/processedImage.jpg", threshold)
         # cv2.imwrite("Images/edges_style_example.jpg", threshold)
 
         self.calculate_coordinates(threshold)

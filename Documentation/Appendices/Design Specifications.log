@@ -2,8 +2,8 @@ This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"Requirement Specification.tex"
-(./Requirement Specification.tex
+**"Design Specifications.tex"
+(./Design Specifications.tex
 LaTeX2e <2016/02/01>
 Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -92,26 +92,12 @@ Package: hyphenat 2009/09/02 v2.3c hyphenation utilities
 \langwohyphens=\language81
 LaTeX Info: Redefining \_ on input line 43.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/footmisc/footmisc.sty
-Package: footmisc 2011/06/06 v5.5b a miscellany of footnote facilities
-\FN@temptoken=\toks19
-\footnotemargin=\dimen112
-\c@pp@next@reset=\count99
-Package footmisc Info: Declaring symbol style bringhurst on input line 855.
-Package footmisc Info: Declaring symbol style chicago on input line 863.
-Package footmisc Info: Declaring symbol style wiley on input line 872.
-Package footmisc Info: Declaring symbol style lamport-robust on input line 883.
-
-Package footmisc Info: Declaring symbol style lamport* on input line 903.
-Package footmisc Info: Declaring symbol style lamport*-robust on input line 924
-.
-)
 (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks20
+\KV@toks@=\toks19
 )
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
@@ -124,18 +110,18 @@ Package ifvtex Info: VTeX not detected.
 (/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
-\Gm@cnth=\count100
-\Gm@cntv=\count101
-\c@Gm@tempcnt=\count102
-\Gm@bindingoffset=\dimen113
-\Gm@wd@mp=\dimen114
-\Gm@odd@mp=\dimen115
-\Gm@even@mp=\dimen116
-\Gm@layoutwidth=\dimen117
-\Gm@layoutheight=\dimen118
-\Gm@layouthoffset=\dimen119
-\Gm@layoutvoffset=\dimen120
-\Gm@dimlist=\toks21
+\Gm@cnth=\count99
+\Gm@cntv=\count100
+\c@Gm@tempcnt=\count101
+\Gm@bindingoffset=\dimen112
+\Gm@wd@mp=\dimen113
+\Gm@odd@mp=\dimen114
+\Gm@even@mp=\dimen115
+\Gm@layoutwidth=\dimen116
+\Gm@layoutheight=\dimen117
+\Gm@layouthoffset=\dimen118
+\Gm@layoutvoffset=\dimen119
+\Gm@dimlist=\toks20
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
@@ -160,17 +146,17 @@ Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
-\Gread@gobject=\count103
+\Gread@gobject=\count102
 ))
-\Gin@req@height=\dimen121
-\Gin@req@width=\dimen122
+\Gin@req@height=\dimen120
+\Gin@req@width=\dimen121
 )
 (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count104
-\float@exts=\toks22
+\c@float@type=\count103
+\float@exts=\toks21
 \float@box=\box28
-\@float@everytoks=\toks23
+\@float@everytoks=\toks22
 \@floatcapt=\box29
 )
 (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
@@ -184,30 +170,30 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \f@ncyO@olf=\skip53
 \f@ncyO@orf=\skip54
 )
-(./Requirement Specification.aux)
-\openout1 = `"Requirement Specification.aux"'.
+(./Design Specifications.aux)
+\openout1 = `"Design Specifications.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Info: Redefining \celsius on input line 43.
-Package gensymb Info: Faking symbols for \degree and \celsius on input line 43.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Info: Redefining \celsius on input line 40.
+Package gensymb Info: Faking symbols for \degree and \celsius on input line 40.
 
 
 
 Package gensymb Warning: Not defining \perthousand.
 
-LaTeX Info: Redefining \ohm on input line 43.
-Package gensymb Info: Using \Omega for \ohm on input line 43.
+LaTeX Info: Redefining \ohm on input line 40.
+Package gensymb Info: Using \Omega for \ohm on input line 40.
 
 Package gensymb Warning: Not defining \micro.
 
@@ -247,17 +233,17 @@ Package gensymb Warning: Not defining \micro.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count105
-\scratchdimen=\dimen123
+\scratchcounter=\count104
+\scratchdimen=\dimen122
 \scratchbox=\box30
-\nofMPsegments=\count106
-\nofMParguments=\count107
-\everyMPshowfont=\toks24
-\MPscratchCnt=\count108
-\MPscratchDim=\dimen124
-\MPnumerator=\count109
-\makeMPintoPDFobject=\count110
-\everyMPtoPDFconversion=\toks25
+\nofMPsegments=\count105
+\nofMParguments=\count106
+\everyMPshowfont=\toks23
+\MPscratchCnt=\count107
+\MPscratchDim=\dimen123
+\MPnumerator=\count108
+\makeMPintoPDFobject=\count109
+\everyMPtoPDFconversion=\toks24
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -305,120 +291,196 @@ e
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-(./Requirement Specification.toc)
+(./Design Specifications.toc)
 \tf@toc=\write3
-\openout3 = `"Requirement Specification.toc"'.
+\openout3 = `"Design Specifications.toc"'.
 
  [1
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 100--113
+Underfull \hbox (badness 10000) in paragraph at lines 82--86
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 100--113
+Underfull \hbox (badness 10000) in paragraph at lines 82--86
 
  []
 
 
-Overfull \hbox (9.79749pt too wide) in paragraph at lines 100--113
-\OT1/cmr/m/n/10 The pri-or-ity on get-ting com-mu-ni-ca-tion be-tween the plot-
-ter and rasp-berry pi us-ing se-rial com-mu-ni-ca-tion
+Overfull \hbox (18.54738pt too wide) in paragraph at lines 82--86
+\OT1/cmr/m/n/10 The de-sign that has been de-vel-oped must meet the re-quire-me
+nts within the Re-quire-ment Specifications.[[]] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 100--113
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 100--113
+Underfull \hbox (badness 10000) in paragraph at lines 87--91
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 100--113
+Underfull \hbox (badness 10000) in paragraph at lines 87--91
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 100--113
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 100--113
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 100--113
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 100--113
-
- []
+<version_control.png, id=13, 690.58pt x 538.01pt>
+File: version_control.png Graphic file (type png)
+ <use version_control.png>
+Package pdftex.def Info: version_control.png used on input line 94.
+(pdftex.def)             Requested size: 216.81pt x 168.9076pt.
 
 [2
 
-]
-Underfull \hbox (badness 10000) in paragraph at lines 114--121
+ <./version_control.png>]
+<class_diagram.png, id=17, 974.64125pt x 812.03375pt>
+File: class_diagram.png Graphic file (type png)
+ <use class_diagram.png>
+Package pdftex.def Info: class_diagram.png used on input line 104.
+(pdftex.def)             Requested size: 433.62001pt x 361.27335pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 108--115
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--121
+Underfull \hbox (badness 10000) in paragraph at lines 108--115
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--121
+Underfull \hbox (badness 10000) in paragraph at lines 108--115
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--121
+Underfull \hbox (badness 10000) in paragraph at lines 108--115
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--121
+Underfull \hbox (badness 10000) in paragraph at lines 108--115
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--121
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 114--121
+Underfull \hbox (badness 10000) in paragraph at lines 108--115
 
  []
 
 [3
 
-] (./Requirement Specification.aux) ) 
+ <./class_diagram.png>]
+<SD_video_feed.png, id=23, 480.79625pt x 304.13625pt>
+File: SD_video_feed.png Graphic file (type png)
+ <use SD_video_feed.png>
+Package pdftex.def Info: SD_video_feed.png used on input line 119.
+(pdftex.def)             Requested size: 216.81pt x 137.14777pt.
+
+<SD_Image_Processing.png, id=24, 600.2425pt x 303.1325pt>
+File: SD_Image_Processing.png Graphic file (type png)
+
+<use SD_Image_Processing.png>
+Package pdftex.def Info: SD_Image_Processing.png used on input line 125.
+(pdftex.def)             Requested size: 281.85036pt x 142.34277pt.
+
+<SD_Plotting.png, id=25, 432.61626pt x 303.1325pt>
+File: SD_Plotting.png Graphic file (type png)
+ <use SD_Plotting.png>
+Package pdftex.def Info: SD_Plotting.png used on input line 131.
+(pdftex.def)             Requested size: 195.12767pt x 136.72289pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[4 <./SD_video_feed.png>] [5 <./SD_Image_Processing.png> <./SD_Plotting.png>]
+<qt_designer.png, id=35, 1305.87875pt x 748.7975pt>
+File: qt_designer.png Graphic file (type png)
+ <use qt_designer.png>
+Package pdftex.def Info: qt_designer.png used on input line 144.
+(pdftex.def)             Requested size: 281.85036pt x 161.6053pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 139--148
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 139--148
+
+ []
+
+<page1.png, id=36, 961.5925pt x 637.38126pt>
+File: page1.png Graphic file (type png)
+ <use page1.png>
+Package pdftex.def Info: page1.png used on input line 151.
+(pdftex.def)             Requested size: 281.85036pt x 186.81985pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<page2.png, id=37, 956.57375pt x 636.3775pt>
+File: page2.png Graphic file (type png)
+ <use page2.png>
+Package pdftex.def Info: page2.png used on input line 158.
+(pdftex.def)             Requested size: 281.85036pt x 187.5064pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<page3.png, id=38, 954.56625pt x 629.35126pt>
+File: page3.png Graphic file (type png)
+ <use page3.png>
+Package pdftex.def Info: page3.png used on input line 165.
+(pdftex.def)             Requested size: 281.85036pt x 185.82027pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<page4.png, id=39, 956.57375pt x 630.355pt>
+File: page4.png Graphic file (type png)
+ <use page4.png>
+Package pdftex.def Info: page4.png used on input line 172.
+(pdftex.def)             Requested size: 281.85036pt x 185.73189pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[6
+
+ <./qt_designer.png>] [7 <./page1.png> <./page2.png>] [8 <./page3.png> <./page4
+.png>]
+Underfull \hbox (badness 2529) in paragraph at lines 189--189
+\OT1/cmr/m/n/10 con-trol. Added se-quence di-a-grams and class
+ []
+
+
+Underfull \hbox (badness 1292) in paragraph at lines 192--192
+[]\OT1/cmr/m/n/10 made mi-nor cor-rects; changed page 4 to style
+ []
+
+[9
+
+] (./Design Specifications.aux) ) 
 Here is how much of TeX's memory you used:
- 2931 strings out of 493029
- 40138 string characters out of 6136234
- 112973 words of memory out of 5000000
- 6432 multiletter control sequences out of 15000+600000
- 5919 words of font info for 22 fonts, out of 8000000 for 9000
+ 2898 strings out of 493029
+ 39641 string characters out of 6136234
+ 112387 words of memory out of 5000000
+ 6391 multiletter control sequences out of 15000+600000
+ 6265 words of font info for 23 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,10n,43p,432b,194s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmss12.pfb>
-Output written on "Requirement Specification.pdf" (4 pages, 69436 bytes).
+ 37i,10n,43p,772b,229s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+s12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pf
+b>
+Output written on "Design Specifications.pdf" (10 pages, 1372535 bytes).
 PDF statistics:
- 33 PDF objects out of 1000 (max. 8388607)
- 22 compressed objects within 1 object stream
+ 72 PDF objects out of 1000 (max. 8388607)
+ 40 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 51 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -24,7 +24,7 @@ if __name__ == '__main__' :
 
 
     # Number of frames to capture
-    num_frames = 120;
+    num_frames = 12000;
 
 
     # print "Capturing {0} frames".format(num_frames)
@@ -45,19 +45,19 @@ if __name__ == '__main__' :
     #        break
 
     img = cv2.imread('testCap.jpg', 0)
-    blur = cv2.GaussianBlur(img, (5, 5), 0)
-    sobal = cv2.Sobel(blur, cv2.CV_64F, 1, 1, ksize=5)
-    ret, threshold = cv2.threshold(sobal, 25, 255, cv2.THRESH_BINARY_INV)
-    for x in range(0, threshold.shape[0]):
-        for y in range(0, threshold.shape[1]):
-            if threshold.item(x, y) == 0:
-                threshold.itemset((x, y), 0)
-                print(str(x) + "," + str(y))
-
+    #blur = cv2.GaussianBlur(img, (5, 5), 0)
+    #sobal = cv2.Sobel(blur, cv2.CV_64F, 1, 1, ksize=5)
+    #ret, threshold = cv2.threshold(sobal, 25, 255, cv2.THRESH_BINARY_INV)
+    #for x in range(0, threshold.shape[0]):
+    #    for y in range(0, threshold.shape[1]):
+    #        if threshold.item(x, y) == 0:
+    #            threshold.itemset((x, y), 0)
+    #            print(str(x) + "," + str(y))
+    canny = cv2.Canny(img, 25, 100)
     for i in range(0, num_frames):
         #threshold.itemset((100, 100), 0)
         #print(threshold.item(100, 100))
-        cv2.imshow("cap", threshold)
+        cv2.imshow("cap", canny)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
